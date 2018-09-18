@@ -1,0 +1,51 @@
+PODS:
+  - AssetsPickerViewController (2.4.2):
+    - Device (~> 3.0.3)
+    - Dimmer (~> 2.0)
+    - FadeView (~> 2.0)
+    - PureLayout
+    - SwiftARGB (~> 2.0)
+    - TinyLog (~> 2.0)
+  - Device (3.0.3)
+  - Dimmer (2.0.3):
+    - FadeView (~> 2.0)
+    - PureLayout
+    - TinyLog (~> 2.0)
+    - UIViewKVO (~> 2.0)
+  - EFColorPicker (1.1.0)
+  - FadeView (2.0.0)
+  - PureLayout (3.0.2)
+  - SwiftARGB (2.0.0)
+  - TinyLog (2.0.7)
+  - UIViewKVO (2.0.0)
+
+DEPENDENCIES:
+  - AssetsPickerViewController
+  - EFColorPicker
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AssetsPickerViewController
+    - Device
+    - Dimmer
+    - EFColorPicker
+    - FadeView
+    - PureLayout
+    - SwiftARGB
+    - TinyLog
+    - UIViewKVO
+
+SPEC CHECKSUMS:
+  AssetsPickerViewController: 997cf978cf13574a4846dae7e9b864a1ec93c77a
+  Device: 9a5264ee4e0f392e7153d2c46b10c8df46b7aad2
+  Dimmer: 9908a0003f4882eca1b2e318e11f82d32280794e
+  EFColorPicker: 214e1979a4017245375b1e276cba952d902b8132
+  FadeView: 80197da2fbee5382b178127e8c5f988a35eef018
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  SwiftARGB: 8727cfcdcfe8709e707a2391f1d5802a7c40dcad
+  TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
+  UIViewKVO: 091f9e020d69e73c4bf5e5ef61cde7bff1c24bbf
+
+PODFILE CHECKSUM: 96601124689211591d7749d0a1aacd27db3bd53c
+
+COCOAPODS: 1.5.0

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MHj-DT-E5k">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Notes-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="CanvasViewController" customModule="RescribeNotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jxh-kP-YqP" customClass="TemplatePalatteView" customModule="RescribeNotes" customModuleProvider="target">
+                                <rect key="frame" x="-410" y="102.5" width="450" height="819"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="450" id="gqz-a3-qBy">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="275"/>
+                                    </constraint>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qxf-RO-ktM" customClass="ToolsPalatteView" customModule="RescribeNotes" customModuleProvider="target">
+                                <rect key="frame" x="728" y="230.5" width="130" height="563"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="e9m-xK-Nb1"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grid1.png" translatesAutoresizingMaskIntoConstraints="NO" id="ECu-nn-TJV">
+                                <rect key="frame" x="25" y="109" width="718" height="890"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzs-v9-5s0" customClass="SketchView" customModule="RescribeNotes" customModuleProvider="target">
+                                <rect key="frame" x="25" y="109" width="718" height="890"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.82352941180000006" green="0.82352941180000006" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhC-Rc-B4T" customClass="ToolbarView" customModule="RescribeNotes" customModuleProvider="target">
+                                <rect key="frame" x="25" y="64" width="718" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Psj-CL-xbI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Qxf-RO-ktM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="40X-SS-w19"/>
+                            <constraint firstItem="IhC-Rc-B4T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="25" id="54P-wF-mJR"/>
+                            <constraint firstItem="IhC-Rc-B4T" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7jW-Rk-UqB"/>
+                            <constraint firstItem="Jxh-kP-YqP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9fQ-nl-o6K"/>
+                            <constraint firstItem="ECu-nn-TJV" firstAttribute="width" secondItem="mzs-v9-5s0" secondAttribute="width" id="F1N-oY-Atg"/>
+                            <constraint firstItem="ECu-nn-TJV" firstAttribute="centerX" secondItem="mzs-v9-5s0" secondAttribute="centerX" id="FYV-Hc-TW5"/>
+                            <constraint firstItem="mzs-v9-5s0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="OFk-Rr-IXo"/>
+                            <constraint firstItem="Jxh-kP-YqP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-410" id="P0j-92-Rch">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-235"/>
+                            </constraint>
+                            <constraint firstItem="mzs-v9-5s0" firstAttribute="top" secondItem="IhC-Rc-B4T" secondAttribute="bottom" constant="5" id="QGJ-9g-67u"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qxf-RO-ktM" secondAttribute="trailing" constant="-90" id="STY-kh-VkV"/>
+                            <constraint firstAttribute="trailing" secondItem="IhC-Rc-B4T" secondAttribute="trailing" constant="25" id="ajt-Nd-9d5"/>
+                            <constraint firstItem="ECu-nn-TJV" firstAttribute="height" secondItem="mzs-v9-5s0" secondAttribute="height" id="bmv-PI-iZa"/>
+                            <constraint firstItem="ECu-nn-TJV" firstAttribute="centerY" secondItem="mzs-v9-5s0" secondAttribute="centerY" id="cAg-BR-msl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mzs-v9-5s0" secondAttribute="trailing" constant="25" id="igP-Z7-HLL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mzs-v9-5s0" secondAttribute="bottom" constant="25" id="mgd-7H-oFW"/>
+                            <constraint firstItem="Jxh-kP-YqP" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.8" id="n0q-eN-XWK"/>
+                            <constraint firstItem="Qxf-RO-ktM" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.55" id="qsE-p9-oH8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Notes" id="DLx-jP-kde"/>
+                    <connections>
+                        <outlet property="backgroundImage" destination="ECu-nn-TJV" id="eWJ-2h-Uxm"/>
+                        <outlet property="sketchView" destination="mzs-v9-5s0" id="c75-IU-tgk"/>
+                        <outlet property="templateLeftConstraint" destination="P0j-92-Rch" id="xGU-7m-hoa"/>
+                        <outlet property="templateView" destination="Jxh-kP-YqP" id="dHD-PT-54l"/>
+                        <outlet property="toolbarView" destination="IhC-Rc-B4T" id="t2d-Dv-FMG"/>
+                        <outlet property="toolsPalatteView" destination="Qxf-RO-ktM" id="93u-oV-81j"/>
+                        <outlet property="toolsRightConstraint" destination="STY-kh-VkV" id="reh-ha-0gJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="799.21875" y="39.84375"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fhT-nm-ef5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MHj-DT-E5k" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xfL-c9-Ktm">
+                        <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="gAw-GQ-a8a"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uqN-KE-e6i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33.59375" y="39.84375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="grid1.png" width="625" height="844"/>
+    </resources>
+</document>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ToolbarView" customModule="RescribeNotes" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="Eon-Td-lkD" id="PCY-x0-BWc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gaD-tV-bP9">
+            <rect key="frame" x="0.0" y="0.0" width="438" height="95"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zd2-c1-zhl">
+                    <rect key="frame" x="0.0" y="0.0" width="438" height="95"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Eon-Td-lkD">
+                            <rect key="frame" x="0.0" y="0.0" width="438" height="95"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LK2-bs-Kfv">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Eon-Td-lkD" firstAttribute="leading" secondItem="Zd2-c1-zhl" secondAttribute="leading" id="3lB-iw-gWo"/>
+                        <constraint firstAttribute="bottom" secondItem="Eon-Td-lkD" secondAttribute="bottom" id="qQJ-F5-Ntu"/>
+                        <constraint firstAttribute="trailing" secondItem="Eon-Td-lkD" secondAttribute="trailing" id="qz8-6n-CaL"/>
+                        <constraint firstItem="Eon-Td-lkD" firstAttribute="top" secondItem="Zd2-c1-zhl" secondAttribute="top" id="usf-Tg-3Qs"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Zd2-c1-zhl" firstAttribute="leading" secondItem="gH6-XJ-2Nr" secondAttribute="leading" id="9qd-Y1-chM"/>
+                <constraint firstItem="Zd2-c1-zhl" firstAttribute="top" secondItem="gH6-XJ-2Nr" secondAttribute="top" id="mHo-9z-Sh9"/>
+                <constraint firstItem="gH6-XJ-2Nr" firstAttribute="bottom" secondItem="Zd2-c1-zhl" secondAttribute="bottom" id="p1N-Co-5CN"/>
+                <constraint firstItem="gH6-XJ-2Nr" firstAttribute="trailing" secondItem="Zd2-c1-zhl" secondAttribute="trailing" id="pm7-gG-VTw"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="gH6-XJ-2Nr"/>
+            <point key="canvasLocation" x="7" y="40.5"/>
+        </view>
+    </objects>
+</document>
