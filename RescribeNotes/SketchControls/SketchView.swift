@@ -126,6 +126,7 @@ public class SketchView: UIView {
     for view in self.subviews {
       if view is ImageViewTool {
         view.removeFromSuperview()
+        break
       }
     }
     self.finishDrawing()

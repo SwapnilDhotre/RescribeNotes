@@ -63,6 +63,13 @@
 		4D202EB2214B8B8C004B06D8 /* TextFieldTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D202EB1214B8B8C004B06D8 /* TextFieldTool.swift */; };
 		4D202EB4214B8BBC004B06D8 /* ImageViewTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D202EB3214B8BBC004B06D8 /* ImageViewTool.swift */; };
 		4D202EB6214BB19B004B06D8 /* SelectTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D202EB5214BB19B004B06D8 /* SelectTool.swift */; };
+		4DBF33922152122000BE0853 /* PenTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF33912152122000BE0853 /* PenTool.swift */; };
+		4DBF33952152126400BE0853 /* LineTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF33942152126400BE0853 /* LineTool.swift */; };
+		4DBF33972152127D00BE0853 /* ArrowTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF33962152127D00BE0853 /* ArrowTool.swift */; };
+		4DBF33992152129F00BE0853 /* RectTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF33982152129F00BE0853 /* RectTool.swift */; };
+		4DBF339B215212BB00BE0853 /* EllipseTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF339A215212BB00BE0853 /* EllipseTool.swift */; };
+		4DBF339D215212E100BE0853 /* StampTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF339C215212E100BE0853 /* StampTool.swift */; };
+		4DBF339F215212FE00BE0853 /* EraserTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF339E215212FE00BE0853 /* EraserTool.swift */; };
 		4DD6619C214153C900083C25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6619B214153C900083C25 /* AppDelegate.swift */; };
 		4DD661A1214153C900083C25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DD6619F214153C900083C25 /* Main.storyboard */; };
 		4DD661A3214153CC00083C25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DD661A2214153CC00083C25 /* Assets.xcassets */; };
@@ -141,6 +148,13 @@
 		4D202EB1214B8B8C004B06D8 /* TextFieldTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTool.swift; sourceTree = "<group>"; };
 		4D202EB3214B8BBC004B06D8 /* ImageViewTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewTool.swift; sourceTree = "<group>"; };
 		4D202EB5214BB19B004B06D8 /* SelectTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTool.swift; sourceTree = "<group>"; };
+		4DBF33912152122000BE0853 /* PenTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenTool.swift; sourceTree = "<group>"; };
+		4DBF33942152126400BE0853 /* LineTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineTool.swift; sourceTree = "<group>"; };
+		4DBF33962152127D00BE0853 /* ArrowTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowTool.swift; sourceTree = "<group>"; };
+		4DBF33982152129F00BE0853 /* RectTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectTool.swift; sourceTree = "<group>"; };
+		4DBF339A215212BB00BE0853 /* EllipseTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseTool.swift; sourceTree = "<group>"; };
+		4DBF339C215212E100BE0853 /* StampTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampTool.swift; sourceTree = "<group>"; };
+		4DBF339E215212FE00BE0853 /* EraserTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraserTool.swift; sourceTree = "<group>"; };
 		4DD66198214153C900083C25 /* RescribeNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RescribeNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD6619B214153C900083C25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DD661A0214153C900083C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -216,10 +230,10 @@
 		4D0D359921429BEA00840427 /* SketchControls */ = {
 			isa = PBXGroup;
 			children = (
+				4DBF33A021521CFC00BE0853 /* Tools */,
+				4DBF33932152124E00BE0853 /* Shape */,
 				4D0D359A21429C1400840427 /* SketchTool.swift */,
 				4D0D359B21429C1400840427 /* SketchView.swift */,
-				4D202EB1214B8B8C004B06D8 /* TextFieldTool.swift */,
-				4D202EB3214B8BBC004B06D8 /* ImageViewTool.swift */,
 				4D202EB5214BB19B004B06D8 /* SelectTool.swift */,
 			);
 			path = SketchControls;
@@ -300,6 +314,29 @@
 				4D202E852147A13E004B06D8 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4DBF33932152124E00BE0853 /* Shape */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF33942152126400BE0853 /* LineTool.swift */,
+				4DBF33962152127D00BE0853 /* ArrowTool.swift */,
+				4DBF33982152129F00BE0853 /* RectTool.swift */,
+				4DBF339A215212BB00BE0853 /* EllipseTool.swift */,
+				4DBF339C215212E100BE0853 /* StampTool.swift */,
+			);
+			path = Shape;
+			sourceTree = "<group>";
+		};
+		4DBF33A021521CFC00BE0853 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				4D202EB1214B8B8C004B06D8 /* TextFieldTool.swift */,
+				4D202EB3214B8BBC004B06D8 /* ImageViewTool.swift */,
+				4DBF33912152122000BE0853 /* PenTool.swift */,
+				4DBF339E215212FE00BE0853 /* EraserTool.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		4DD6618F214153C900083C25 = {
@@ -631,17 +668,23 @@
 				4D202E8F2147A23C004B06D8 /* Roboto-Regular.ttf in Sources */,
 				4D0D359D21429C1400840427 /* SketchView.swift in Sources */,
 				4D202EB2214B8B8C004B06D8 /* TextFieldTool.swift in Sources */,
+				4DBF33972152127D00BE0853 /* ArrowTool.swift in Sources */,
+				4DBF33952152126400BE0853 /* LineTool.swift in Sources */,
 				4DDEBD8821415AC4005D32A9 /* NibView.swift in Sources */,
 				4D202E8B2147A166004B06D8 /* UIFontExtension.swift in Sources */,
 				4DD661BA214155E400083C25 /* UIViewExtension.swift in Sources */,
 				4D202E6E21465FC9004B06D8 /* ToolBarCell.swift in Sources */,
+				4DBF339F215212FE00BE0853 /* EraserTool.swift in Sources */,
+				4DBF339D215212E100BE0853 /* StampTool.swift in Sources */,
 				4DD661B22141551C00083C25 /* CanvasViewController.swift in Sources */,
 				4DD661BC2141564E00083C25 /* TemplatePalatteView.swift in Sources */,
 				4D0D35A32142B26100840427 /* ShapeToolCell.swift in Sources */,
 				4D202E6C21465FB5004B06D8 /* ToolbarView.swift in Sources */,
 				4D202E6421465B1F004B06D8 /* UIColorExtension.swift in Sources */,
+				4DBF33922152122000BE0853 /* PenTool.swift in Sources */,
 				4D202EAC21489288004B06D8 /* UIImageViewExtension.swift in Sources */,
 				4DDEBD8C2141639C005D32A9 /* TemplateCell.swift in Sources */,
+				4DBF33992152129F00BE0853 /* RectTool.swift in Sources */,
 				4D202EA72147D44F004B06D8 /* UIImageExtension.swift in Sources */,
 				4D0D3571214259B300840427 /* ToolsPalatteView.swift in Sources */,
 				4D0D359C21429C1400840427 /* SketchTool.swift in Sources */,
@@ -649,6 +692,7 @@
 				4D202EB4214B8BBC004B06D8 /* ImageViewTool.swift in Sources */,
 				4DD6619C214153C900083C25 /* AppDelegate.swift in Sources */,
 				4D202E702146758F004B06D8 /* SliderView.swift in Sources */,
+				4DBF339B215212BB00BE0853 /* EllipseTool.swift in Sources */,
 				4D0D357521425B7B00840427 /* ToolCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

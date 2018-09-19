@@ -33,12 +33,24 @@ class SelectTool: SketchTool {
       context.setShadow(offset: CGSize(width: 0, height: 0), blur: 0, color: nil)
 
       if let image = self.imageTool?.image {
-        let imageX = self.imageTool!.touchPoint.x  - (self.imageTool!.actualWidth / 2.0)
-        let imageY = self.imageTool!.touchPoint.y - (self.imageTool!.actualHeight / 2.0)
+
         let imageWidth = self.imageTool!.actualWidth
         let imageHeight = self.imageTool!.actualHeight
 
-        image.draw(in: CGRect(x: imageX, y: imageY, width: imageWidth, height: imageHeight))
+        // Move the origin to center point of the image according to parent frame.
+        // Suppose origin of the frame is 100 x 100 and width and height is 300 x 300
+        // then values should be (100 + (300 / 2) x 100 + (300 / 2))
+        context.translateBy(x: self.imageTool!.touchPoint.x, y: self.imageTool!.touchPoint.y)
+        
+        // rotate around this point
+        context.rotate(by: (self.imageTool!.degressRotated * CGFloat.pi) / 180)
+
+        // Below line stops mirror image to be drawn
+        context.scaleBy(x: 1, y: -1)
+
+        // Now in drawing as we are at center position of the image we need to move back to origin position of the object
+        context.draw(image.cgImage!, in: CGRect(x: -(imageWidth / 2), y: -(imageHeight / 2), width: imageWidth, height: imageHeight))
+
         print("Now image is written")
       }
     }

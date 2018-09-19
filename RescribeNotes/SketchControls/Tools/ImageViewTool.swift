@@ -17,8 +17,9 @@ class ImageViewTool: UIImageView, SketchTool {
 
   var imageViewToPan: UIImageView?
 
-  var actualWidth: CGFloat = 0
-  var actualHeight: CGFloat = 0
+  var actualWidth: CGFloat = 150
+  var actualHeight: CGFloat = 150
+  var degressRotated: CGFloat = 0
 
   var width: CGFloat = 150 {
     didSet {
@@ -41,6 +42,7 @@ class ImageViewTool: UIImageView, SketchTool {
     super.init(frame: CGRect(x: 0, y: 0, width: self.width, height: height))
 
     self.setDashedBorder()
+    self.setDropShadow()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -55,6 +57,13 @@ class ImageViewTool: UIImageView, SketchTool {
     borderView.fillColor = nil
     borderView.path = UIBezierPath(rect: self.bounds).cgPath
     self.layer.addSublayer(borderView)
+  }
+
+  func setDropShadow() {
+    self.shadowColor = .black
+    self.shadowOffset = CGSize(width: 0, height: 0)
+    self.shadowRadius = 5
+    self.shadowOpacity = 0.3
   }
 
   func setInitialPoint(_ firstPoint: CGPoint) {
@@ -176,6 +185,32 @@ extension ImageViewTool: UIGestureRecognizerDelegate {
     if let view = recognizer.view as? ImageViewTool {
       view.transform = view.transform.rotated(by: recognizer.rotation)
       recognizer.rotation = 0
+
+      let radians: Double = atan2( Double(view.transform.b), Double(view.transform.a))
+      let degrees = radians * Double((180 / Float.pi))
+
+      if recognizer.state == .ended || recognizer.state == .cancelled {
+        var degreeToAnimate: CGFloat = 0
+        self.degressRotated = CGFloat(degrees)
+        /*switch degrees {
+        case -45...45:
+          print("the default value 0, no need to any assign...")
+        case 46...135:
+          degreeToAnimate = CGFloat.pi / 2
+        case 136...180, -180 ... -136:
+          degreeToAnimate = CGFloat.pi
+        case -135 ... -46:
+          degreeToAnimate = -(CGFloat.pi / 2)
+        default:
+          print("!")
+        }
+
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
+          view.transform = CGAffineTransform(rotationAngle: degreeToAnimate)
+        }, completion: { _ in
+          recognizer.rotation = 0
+        })*/
+      }
     }
   }
 
