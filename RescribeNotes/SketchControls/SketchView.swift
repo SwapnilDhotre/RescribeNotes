@@ -41,11 +41,11 @@ public class SketchView: UIView {
   public var stampImage: UIImage?
   public var drawTool: SketchToolType = .pen {
 
-    willSet {
-      if self.currentTool is SelectTool {
-        self.drawImage()
-      }
-    }
+    //    willSet {
+    //      if self.drawTool == .select {
+    //        self.drawImage()
+    //      }
+    //    }
 
     didSet {
       sketchViewDelegate?.drawToolChanged?(selectedTool: self.drawTool)
@@ -65,7 +65,8 @@ public class SketchView: UIView {
   private var backgroundImage: UIImage?
   private var drawMode: ImageRenderingMode = .original
 
-  var selectTool = SelectTool()
+  var dragTools: [SelectTool] = []
+
   var imageViewSelected: Bool = false
   var lastPanPoint: CGPoint?
 
@@ -119,19 +120,38 @@ public class SketchView: UIView {
 
   func drawImage() {
 
-    if let selectTool = self.currentTool as? SelectTool {
-
+    if let selectTool = self.getSelectTool() {
       selectTool.shouldDraw = true
+      self.currentTool = selectTool
     }
     for view in self.subviews {
       if view is ImageViewTool {
         view.removeFromSuperview()
-        break
       }
     }
-    self.finishDrawing()
-    self.drawTool = .pen
-    setNeedsDisplay()
+    finishDrawing()
+  }
+
+  func getSelectTool() -> SelectTool? {
+
+    var tool: SelectTool?
+    if let selectTool = self.currentTool as? SelectTool {
+
+      tool = selectTool
+    } else if let selectTool = self.pathArray.lastObject as? SelectTool {
+
+      tool = selectTool
+    } else if let imageTool = self.pathArray.lastObject as? ImageViewTool {
+      let selectTool = SelectTool()
+      selectTool.imageTool = imageTool
+      tool = selectTool
+    }
+
+    tool?.lineWidth = lineWidth
+    tool?.lineColor = lineColor
+    tool?.lineAlpha = lineAlpha
+
+    return tool
   }
 
   private func updateCacheImage(_ isUpdate: Bool) {
@@ -157,19 +177,27 @@ public class SketchView: UIView {
             tool.draw()
             self.addSubview(tool)
           } else if let tool: ImageViewTool = tool as? ImageViewTool {
-            self.selectTool.imageTool = tool
-            self.drawTool = .select
-            if (pathArray.count - 1) == index {
-              self.selectTool.shouldDraw = false
-              self.imageViewSelected = true
-              resetTool()
-              self.bufferArray.add(tool)
-              self.addSubview(tool)
+            if pathArray.count > index + 1 {
+              if let _: SelectTool = pathArray[index + 1] as? SelectTool {
+                // Select tool is present
+                print("Select tool is present")
+              } else {
+                tool.draw()
+                self.imageViewSelected = true
+                self.addSubview(tool)
+                self.drawTool = .select
+              }
             } else {
-              self.selectTool.shouldDraw = true
-              self.selectTool.draw()
-              self.drawTool = .pen
+              tool.draw()
+              self.imageViewSelected = true
+              self.addSubview(tool)
+              self.drawTool = .select
             }
+
+          } else if let tool: SelectTool = tool as? SelectTool {
+
+            tool.shouldDraw = true
+            tool.draw()
             self.setNeedsLayout()
           } else {
             tool.draw()
@@ -185,14 +213,18 @@ public class SketchView: UIView {
       } else if let tool: ImageViewTool = currentTool as? ImageViewTool {
         tool.draw()
         self.addSubview(tool)
+      } else if let tool: SelectTool = currentTool as? SelectTool {
+        tool.shouldDraw = true
+        tool.draw()
       } else {
         currentTool?.draw()
       }
-
     }
 
     image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
+
+    self.setNeedsLayout()
   }
 
   private func toolWithCurrentSettings() -> SketchTool? {
@@ -230,7 +262,8 @@ public class SketchView: UIView {
       let imageTool = ImageViewTool()
       return imageTool
     case .select:
-      return self.selectTool
+
+      return self.getSelectTool()
     }
   }
 
@@ -256,6 +289,7 @@ public class SketchView: UIView {
       // Do nothing here
       print("Select Tool selected")
       guard (currentTool as? SelectTool) != nil else { return }
+
     case is PenTool:
       guard let penTool = currentTool as? PenTool else { return }
       pathArray.add(penTool)
@@ -273,10 +307,14 @@ public class SketchView: UIView {
     case is ImageViewTool:
       guard let imageViewTool = currentTool as? ImageViewTool else { return }
       imageViewTool.image = self.currentSelectedImage
-      pathArray.add(imageViewTool)
       imageViewTool.setInitialPoint(currentPoint!)
-      self.selectTool.imageTool = imageViewTool
-      self.drawTool = .select
+      pathArray.add(imageViewTool)
+
+      if let selectTool = self.getSelectTool() {
+        selectTool.shouldDraw = false
+        pathArray.add(selectTool)
+        self.drawTool = .select
+      }
     default:
       guard let currentTool = currentTool else { return }
       pathArray.add(currentTool)
@@ -318,10 +356,17 @@ public class SketchView: UIView {
   }
 
   public func clear() {
+    self.drawTool = .pen
     resetTool()
     bufferArray.removeAllObjects()
     pathArray.removeAllObjects()
     updateCacheImage(true)
+
+    for view in self.subviews {
+      if view is ImageViewTool {
+        view.removeFromSuperview()
+      }
+    }
 
     setNeedsDisplay()
   }
@@ -379,7 +424,7 @@ public class SketchView: UIView {
       if self.imageViewSelected {
         self.imageViewSelected = false
 
-        if let tool: ImageViewTool = tool as? ImageViewTool {
+        if let tool: SelectTool = tool as? SelectTool {
 
           for view in self.subviews {
             if view is ImageViewTool {
@@ -388,25 +433,13 @@ public class SketchView: UIView {
             }
           }
 
-          self.selectTool.imageTool = tool
-          self.drawTool = .select
-          currentTool = toolWithCurrentSettings()
-          self.drawImage()
-//          self.selectTool.shouldDraw = true
-//          self.selectTool.draw()
-//          self.drawTool = .pen
-
-        } else {
-          updateCacheImage(true)
+          self.currentTool = tool
         }
-
-        self.setNeedsLayout()
-      } else {
-        updateCacheImage(true)
-        bufferArray.removeLastObject()
-        setNeedsDisplay()
       }
 
+      updateCacheImage(true)
+      bufferArray.removeLastObject()
+      setNeedsDisplay()
     }
   }
 

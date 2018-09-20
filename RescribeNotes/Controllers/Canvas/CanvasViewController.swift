@@ -94,17 +94,19 @@ class CanvasViewController: UIViewController {
     self.toolsPalatteView.btnExpandTools.addTarget(self, action: #selector(self.expandTools(button:)), for: .touchUpInside)
 
     self.sketchView.sketchViewDelegate = self
+    self.addClearButton()
   }
 
-  @objc func drawImage() {
+  func addClearButton() {
 
-    self.sketchView.drawImage()
-    self.removeDoneBarButton()
+    let clearBarButton = UIBarButtonItem(title: "Clear All", style: .done, target: self, action:  #selector(self.clearAll))
+    self.navigationItem.leftBarButtonItem  = clearBarButton
   }
 
   func addDoneBarButton() {
-    let button1 = UIBarButtonItem(title: "Done", style: .done, target: self, action:  #selector(self.drawImage))
-    self.navigationItem.rightBarButtonItem  = button1
+
+    let doneBarButton = UIBarButtonItem(title: "Done", style: .done, target: self, action:  #selector(self.drawImage))
+    self.navigationItem.rightBarButtonItem  = doneBarButton
   }
 
   func removeDoneBarButton() {
@@ -344,6 +346,23 @@ class CanvasViewController: UIViewController {
       }
     }
   }
+
+
+  @objc func drawImage() {
+
+    self.sketchView.drawImage()
+    self.removeDoneBarButton()
+  }
+
+  @objc func clearAll() {
+
+    let alert: UIAlertController = UIAlertController(title: "Add Notes", message: "Are you sure you want to clear your work?", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+      self.sketchView.clear()
+    }))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    self.present(alert, animated: true, completion: nil)
+  }
 }
 
 // MARK: - Template palatte
@@ -381,10 +400,9 @@ extension CanvasViewController: ToolsPalatteDelegate {
       self.sketchView.drawTool = .imageTool
       self.showImagePickOptions(sourceView: self.emptyView!)
     } else if tool == .clipArt {
-      self.sketchView.drawTool = .stamp
-      self.showImagePickOptions(sourceView: self.emptyView!)
-      self.toolsPalatteView.btnExpandTools.sendActions(for: .touchUpInside)
+//      self.sketchView.drawTool = .stamp
 //      self.showImagePickOptions(sourceView: self.emptyView!)
+      self.toolsPalatteView.btnExpandTools.sendActions(for: .touchUpInside)
     }
   }
 }
@@ -513,6 +531,7 @@ extension CanvasViewController: UIPopoverPresentationControllerDelegate, EFColor
   }
 }
 
+// MARK: - AssetController
 extension CanvasViewController: AssetsPickerViewControllerDelegate {
   func assetsPickerCannotAccessPhotoLibrary(controller _: AssetsPickerViewController) {
     logw("Need permission to access photo library.")
@@ -524,14 +543,15 @@ extension CanvasViewController: AssetsPickerViewControllerDelegate {
 
   func assetsPicker(controller _: AssetsPickerViewController, selected assets: [PHAsset]) {
 
-    if let asset = assets.first, let pickedImage = self.getUIImage(asset: asset) as? UIImage {
-      self.sketchView.currentSelectedImage = pickedImage
+    if let asset = assets.first, let pickedImage = self.getUIImage(asset: asset) {
+      self.sketchView.currentSelectedImage = pickedImage.fixOrientation()
+//      self.sketchView.stampImage = pickedImage.fixOrientation()
     }
   }
 
   func assetsPicker(controller: AssetsPickerViewController, shouldSelect _: PHAsset, at indexPath: IndexPath) -> Bool {
     log("shouldSelect: \(indexPath.row)")
-    if controller.selectedAssets.count > 1 {
+    if controller.selectedAssets.count > 0 {
       return false
     }
     return true
@@ -551,12 +571,13 @@ extension CanvasViewController: AssetsPickerViewControllerDelegate {
   }
 }
 
+//MARK: - Camera image picker
 extension CanvasViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
     if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
 
-      self.sketchView.currentSelectedImage = pickedImage
-      self.sketchView.stampImage = pickedImage
+      self.sketchView.currentSelectedImage = pickedImage.fixOrientation()
+//      self.sketchView.stampImage = pickedImage.fixOrientation()
     }
     picker.dismiss(animated: true, completion: nil)
   }

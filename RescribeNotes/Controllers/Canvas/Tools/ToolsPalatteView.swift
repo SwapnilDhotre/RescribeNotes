@@ -49,7 +49,7 @@ class ToolsPalatteView: NibView {
 
     self.tools = [
 
-      Tool(title: "Brush", tool: .paintBrush),
+//      Tool(title: "Brush", tool: .paintBrush),
       Tool(title: "Pencil", tool: .pencilTool),
       Tool(title: "Text", tool: .textTool),
       Tool(title: "Shape", tool: .shapeTool),

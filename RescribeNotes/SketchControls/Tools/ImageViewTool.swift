@@ -112,11 +112,11 @@ class ImageViewTool: UIImageView, SketchTool {
   }
 
   func addRotateGesture(view: UIView) {
-    let rotationGestureRecognizer =
-      UIRotationGestureRecognizer(target: self,
-                                  action: #selector(self.rotationGesture))
-    rotationGestureRecognizer.delegate = self
-    view.addGestureRecognizer(rotationGestureRecognizer)
+//    let rotationGestureRecognizer =
+//      UIRotationGestureRecognizer(target: self,
+//                                  action: #selector(self.rotationGesture))
+//    rotationGestureRecognizer.delegate = self
+//    view.addGestureRecognizer(rotationGestureRecognizer)
   }
 }
 

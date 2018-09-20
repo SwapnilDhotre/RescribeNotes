@@ -33,7 +33,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qxf-RO-ktM" customClass="ToolsPalatteView" customModule="RescribeNotes" customModuleProvider="target">
-                                <rect key="frame" x="728" y="230.5" width="130" height="563"/>
+                                <rect key="frame" x="728" y="256" width="130" height="512"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="e9m-xK-Nb1"/>
                                 </constraints>
@@ -89,7 +89,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mzs-v9-5s0" secondAttribute="trailing" constant="25" id="igP-Z7-HLL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mzs-v9-5s0" secondAttribute="bottom" constant="25" id="mgd-7H-oFW"/>
                             <constraint firstItem="Jxh-kP-YqP" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.8" id="n0q-eN-XWK"/>
-                            <constraint firstItem="Qxf-RO-ktM" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.55" id="qsE-p9-oH8"/>
+                            <constraint firstItem="Qxf-RO-ktM" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="qsE-p9-oH8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
