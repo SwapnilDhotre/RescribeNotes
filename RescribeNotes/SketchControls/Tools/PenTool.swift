@@ -67,7 +67,7 @@ class PenTool: UIBezierPath, SketchTool {
       context.setLineCap(.round)
       context.setLineWidth(lineWidth)
       context.setStrokeColor(lineColor.cgColor)
-      context.setBlendMode(.multiply)
+      context.setBlendMode(.normal)
       context.setAlpha(lineAlpha)
       context.strokePath()
     case .blur:

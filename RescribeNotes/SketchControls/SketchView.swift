@@ -41,12 +41,11 @@ public class SketchView: UIView {
   public var stampImage: UIImage?
   public var drawTool: SketchToolType = .pen {
 
-    //    willSet {
-    //      if self.drawTool == .select {
-    //        self.drawImage()
-    //      }
-    //    }
-
+//    willSet {
+//      if self.imageViewSelected && !(self.currentTool is SelectTool) {
+//        self.drawImage()
+//      }
+//    }
     didSet {
       sketchViewDelegate?.drawToolChanged?(selectedTool: self.drawTool)
     }
@@ -120,16 +119,21 @@ public class SketchView: UIView {
 
   func drawImage() {
 
+    self.currentTool = nil
+    setNeedsDisplay()
+
     if let selectTool = self.getSelectTool() {
       selectTool.shouldDraw = true
       self.currentTool = selectTool
-    }
-    for view in self.subviews {
-      if view is ImageViewTool {
-        view.removeFromSuperview()
+
+      for view in self.subviews {
+        if view is ImageViewTool {
+          view.removeFromSuperview()
+        }
       }
+      finishDrawing()
+      self.drawTool = .pen
     }
-    finishDrawing()
   }
 
   func getSelectTool() -> SelectTool? {
@@ -212,6 +216,7 @@ public class SketchView: UIView {
         self.addSubview(tool)
       } else if let tool: ImageViewTool = currentTool as? ImageViewTool {
         tool.draw()
+        self.imageViewSelected = true
         self.addSubview(tool)
       } else if let tool: SelectTool = currentTool as? SelectTool {
         tool.shouldDraw = true

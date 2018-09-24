@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import EFColorPicker
 import AssetsPickerViewController
 import Photos
 import TinyLog
@@ -23,6 +22,7 @@ class CanvasViewController: UIViewController {
   @IBOutlet var toolbarView: ToolbarView!
   
   @IBOutlet var sketchView: SketchView!
+  @IBOutlet var gridButton: UIButton!
 
   var emptyView: UIView?
   var imageViewToPan: UIImageView?
@@ -62,20 +62,18 @@ class CanvasViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
+    self.drawGrid(lineWidth: 1, gap: 50, color: UIColor.red.withAlphaComponent(1))
     self.updateViewOnAppear()
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
 
   // MARK: - Custom Methods
   func updateViewOnAppear() {
 
     self.templateView.visualEffect.roundCorners(corners: [.topRight, .bottomRight], radius: 10)
-//    self.toolsPalatteView.visualEffect.roundCorners(corners: [.topLeft, .bottomLeft], radius: 10)
-//    self.templateView.visualEffect.makeBottomShadow()
 
     self.view.bringSubview(toFront: self.templateView)
     self.view.bringSubview(toFront: self.toolsPalatteView)
@@ -95,6 +93,46 @@ class CanvasViewController: UIViewController {
 
     self.sketchView.sketchViewDelegate = self
     self.addClearButton()
+  }
+
+  func drawGrid(lineWidth: CGFloat, gap: CGFloat, color: UIColor) {
+
+    let originalImage = UIImage()
+    let widthOfImage = self.backgroundImage.bounds.width
+    let heightOfImage = self.backgroundImage.bounds.height
+    UIGraphicsBeginImageContext(self.backgroundImage.bounds.size)
+
+    // Pass 1: Draw the original image as the background
+    originalImage.draw(at: CGPoint.zero)
+
+    // Pass 2: Draw the line on top of original image
+    let context = UIGraphicsGetCurrentContext()!
+    context.setLineWidth(lineWidth)
+
+    var yPosition: CGFloat = 0
+    while (yPosition < heightOfImage) {
+      context.move(to: CGPoint(x: 0, y: yPosition))
+      context.addLine(to: CGPoint(x: widthOfImage, y: yPosition))
+      yPosition += gap
+    }
+
+    var xPosition: CGFloat = 0
+    while (xPosition < widthOfImage) {
+      context.move(to: CGPoint(x: xPosition, y: 0))
+      context.addLine(to: CGPoint(x: xPosition, y: heightOfImage))
+      xPosition += gap
+    }
+
+    context.setStrokeColor(color.cgColor)
+    context.strokePath()
+
+    // Create new image
+    if let image = UIGraphicsGetImageFromCurrentImageContext() {
+      self.backgroundImage.image = image
+    }
+
+    // Tidy up
+    UIGraphicsEndImageContext();
   }
 
   func addClearButton() {
@@ -125,21 +163,22 @@ class CanvasViewController: UIViewController {
   func showColorPicker(forView view: UIView) {
 
     let colorSelectionController = EFColorSelectionViewController()
-    let navCtrl = UINavigationController(rootViewController: colorSelectionController)
-    navCtrl.navigationBar.backgroundColor = UIColor.white
-    navCtrl.navigationBar.isTranslucent = false
-    navCtrl.modalPresentationStyle = UIModalPresentationStyle.popover
-    navCtrl.popoverPresentationController?.delegate = self
-    navCtrl.popoverPresentationController?.sourceView = view
-    navCtrl.popoverPresentationController?.sourceRect = view.bounds
-    navCtrl.preferredContentSize = colorSelectionController.view.systemLayoutSizeFitting(
-      UILayoutFittingCompressedSize
-    )
-
     colorSelectionController.delegate = self
     colorSelectionController.color = self.view.backgroundColor ?? UIColor.white
 
     if UIUserInterfaceSizeClass.compact == self.traitCollection.horizontalSizeClass {
+
+      let navCtrl = UINavigationController(rootViewController: colorSelectionController)
+      navCtrl.navigationBar.backgroundColor = UIColor.white
+      navCtrl.navigationBar.isTranslucent = false
+      navCtrl.modalPresentationStyle = UIModalPresentationStyle.popover
+      navCtrl.popoverPresentationController?.delegate = self
+      navCtrl.popoverPresentationController?.sourceView = view
+      navCtrl.popoverPresentationController?.sourceRect = view.bounds
+      navCtrl.preferredContentSize = colorSelectionController.view.systemLayoutSizeFitting(
+        UILayoutFittingCompressedSize
+      )
+
       let doneBtn: UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Done", comment: ""),
         style: UIBarButtonItemStyle.done,
@@ -147,8 +186,20 @@ class CanvasViewController: UIViewController {
         action: #selector(dismissColorPicker(_:))
       )
       colorSelectionController.navigationItem.rightBarButtonItem = doneBtn
+
+      self.present(navCtrl, animated: true, completion: nil)
+    } else {
+      colorSelectionController.modalPresentationStyle = UIModalPresentationStyle.popover
+      colorSelectionController.popoverPresentationController?.delegate = self
+      colorSelectionController.popoverPresentationController?.sourceView = view
+      colorSelectionController.popoverPresentationController?.sourceRect = view.bounds
+      colorSelectionController.preferredContentSize = colorSelectionController.view.systemLayoutSizeFitting(
+        UILayoutFittingCompressedSize
+      )
+
+      self.present(colorSelectionController, animated: true, completion: nil)
     }
-    self.present(navCtrl, animated: true, completion: nil)
+
   }
 
   func traingleShapeWithCenter(center: CGPoint, side: CGFloat) -> CAShapeLayer {
@@ -213,7 +264,13 @@ class CanvasViewController: UIViewController {
     view.heightAnchor.constraint(equalToConstant: customViewHeight).isActive = true
 
     alertController.view.translatesAutoresizingMaskIntoConstraints = false
-    alertController.view.heightAnchor.constraint(equalToConstant: customViewHeight + 55).isActive = true
+
+    if UIUserInterfaceSizeClass.compact == self.traitCollection.horizontalSizeClass {
+      alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+      alertController.view.heightAnchor.constraint(equalToConstant: customViewHeight + 120).isActive = true
+    } else {
+      alertController.view.heightAnchor.constraint(equalToConstant: customViewHeight + 55).isActive = true
+    }
 
     alertController.popoverPresentationController?.delegate = self
     alertController.popoverPresentationController?.sourceView = sourceView
@@ -347,13 +404,77 @@ class CanvasViewController: UIViewController {
     }
   }
 
-
   @objc func drawImage() {
 
     self.sketchView.drawImage()
     self.removeDoneBarButton()
   }
 
+  @IBAction func gridBtnTapped(_ sender: UIButton) {
+
+    let alertController = UIAlertController(title: "Pick Report", message: nil, preferredStyle: .actionSheet)
+
+    let height: CGFloat = 550
+    let view: GridView = GridView.fromNib()
+    view.delegate = self
+
+    ViewEmbedder.embed(
+      withIdentifier: "MyVC", // Storyboard ID
+      parent: alertController,
+      container: view.colorPalatteView) { vc in
+        // do things when embed complete
+        print("Embedding completed")
+    }
+
+    alertController.view.addSubview(view)
+
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 45).isActive = true
+    view.rightAnchor.constraint(equalTo: alertController.view.rightAnchor, constant: -10).isActive = true
+    view.leftAnchor.constraint(equalTo: alertController.view.leftAnchor, constant: 10).isActive = true
+    view.heightAnchor.constraint(equalToConstant: height).isActive = true
+
+    alertController.view.translatesAutoresizingMaskIntoConstraints = false
+
+    alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+
+      print("Cancel tapped.")
+    }))
+
+    alertController.view.layoutSubviews()
+
+    // Show Action sheet according to device
+    if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+      if let presenter = alertController.popoverPresentationController {
+        presenter.sourceView = sender
+        presenter.sourceRect = sender.bounds
+      }
+
+      alertController.view.heightAnchor.constraint(equalToConstant: height + 55).isActive = true
+
+      present(alertController, animated: true, completion: nil)
+
+    } else {
+      alertController.view.heightAnchor.constraint(equalToConstant: height + 120).isActive = true
+      present(alertController, animated: true, completion: nil)
+    }
+
+  }
+
+  func showGridColorPicker(view: UIView) {
+
+    let height: CGFloat = 480
+    let tipView: SliderView = SliderView.fromNib()
+    tipView.lblSlider.text = "Tip Size: \(Int(self.tipSize))"
+    tipView.slider.setValue(Float(self.tipSize), animated: true)
+    tipView.slider.tag = 1
+    tipView.slider.addTarget(self, action: #selector(self.sliderValueChanged(_:_:)), for: UIControlEvents.valueChanged)
+
+    self.tipSizeSlider = tipView
+
+    self.showActionSheet(forView: tipView, sourceView: view, withTitle: "Pen - Size", customViewHeight: height)
+  }
+  
   @objc func clearAll() {
 
     let alert: UIAlertController = UIAlertController(title: "Add Notes", message: "Are you sure you want to clear your work?", preferredStyle: .alert)
@@ -443,7 +564,7 @@ extension CanvasViewController: ToolbarDelegate {
     } else if barButton.object == .redo {
       self.sketchView.redo()
     } else if barButton.object == .eraser {
-      
+
       self.sketchView.drawTool = .eraser
       self.toolbarView.eraserSelected = true
       self.toolbarView.collectionView.reloadData()
@@ -568,6 +689,12 @@ extension CanvasViewController: AssetsPickerViewControllerDelegate {
 
   func assetsPicker(controller _: AssetsPickerViewController, didDeselect _: PHAsset, at indexPath: IndexPath) {
     log("didDeselect: \(indexPath.row)")
+  }
+}
+
+extension CanvasViewController: GridManipulation {
+  func gridValueChanged(lineThickness: CGFloat, gapSize: CGFloat, lineColor: UIColor) {
+    self.drawGrid(lineWidth: lineThickness, gap: gapSize, color: lineColor)
   }
 }
 

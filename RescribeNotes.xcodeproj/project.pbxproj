@@ -70,6 +70,20 @@
 		4DBF339B215212BB00BE0853 /* EllipseTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF339A215212BB00BE0853 /* EllipseTool.swift */; };
 		4DBF339D215212E100BE0853 /* StampTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF339C215212E100BE0853 /* StampTool.swift */; };
 		4DBF339F215212FE00BE0853 /* EraserTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF339E215212FE00BE0853 /* EraserTool.swift */; };
+		4DBF34392154BA5900BE0853 /* GridView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF34382154BA5900BE0853 /* GridView.xib */; };
+		4DBF343C2154BFF000BE0853 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF343B2154BFF000BE0853 /* GridView.swift */; };
+		4DBF345C2154C97800BE0853 /* ViewEmbedder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF345B2154C97800BE0853 /* ViewEmbedder.swift */; };
+		4DBF346A2154D1D300BE0853 /* EFColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF345F2154D1D200BE0853 /* EFColorUtils.swift */; };
+		4DBF346B2154D1D300BE0853 /* EFColorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34602154D1D200BE0853 /* EFColorSelectionView.swift */; };
+		4DBF346C2154D1D300BE0853 /* EFColorSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34612154D1D200BE0853 /* EFColorSelectionViewController.swift */; };
+		4DBF346D2154D1D300BE0853 /* EFColorComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34622154D1D200BE0853 /* EFColorComponentView.swift */; };
+		4DBF346E2154D1D300BE0853 /* EFHSBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34632154D1D200BE0853 /* EFHSBView.swift */; };
+		4DBF346F2154D1D300BE0853 /* EFColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34642154D1D200BE0853 /* EFColorView.swift */; };
+		4DBF34702154D1D300BE0853 /* EFControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34652154D1D300BE0853 /* EFControl.swift */; };
+		4DBF34712154D1D300BE0853 /* EFSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34662154D1D300BE0853 /* EFSliderView.swift */; };
+		4DBF34722154D1D300BE0853 /* EFThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34672154D1D300BE0853 /* EFThumbView.swift */; };
+		4DBF34732154D1D300BE0853 /* EFColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34682154D1D300BE0853 /* EFColorWheelView.swift */; };
+		4DBF34742154D1D300BE0853 /* EFRGBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34692154D1D300BE0853 /* EFRGBView.swift */; };
 		4DD6619C214153C900083C25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6619B214153C900083C25 /* AppDelegate.swift */; };
 		4DD661A1214153C900083C25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DD6619F214153C900083C25 /* Main.storyboard */; };
 		4DD661A3214153CC00083C25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DD661A2214153CC00083C25 /* Assets.xcassets */; };
@@ -155,6 +169,20 @@
 		4DBF339A215212BB00BE0853 /* EllipseTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseTool.swift; sourceTree = "<group>"; };
 		4DBF339C215212E100BE0853 /* StampTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampTool.swift; sourceTree = "<group>"; };
 		4DBF339E215212FE00BE0853 /* EraserTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraserTool.swift; sourceTree = "<group>"; };
+		4DBF34382154BA5900BE0853 /* GridView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GridView.xib; sourceTree = "<group>"; };
+		4DBF343B2154BFF000BE0853 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		4DBF345B2154C97800BE0853 /* ViewEmbedder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEmbedder.swift; sourceTree = "<group>"; };
+		4DBF345F2154D1D200BE0853 /* EFColorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorUtils.swift; sourceTree = "<group>"; };
+		4DBF34602154D1D200BE0853 /* EFColorSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorSelectionView.swift; sourceTree = "<group>"; };
+		4DBF34612154D1D200BE0853 /* EFColorSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorSelectionViewController.swift; sourceTree = "<group>"; };
+		4DBF34622154D1D200BE0853 /* EFColorComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorComponentView.swift; sourceTree = "<group>"; };
+		4DBF34632154D1D200BE0853 /* EFHSBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFHSBView.swift; sourceTree = "<group>"; };
+		4DBF34642154D1D200BE0853 /* EFColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorView.swift; sourceTree = "<group>"; };
+		4DBF34652154D1D300BE0853 /* EFControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFControl.swift; sourceTree = "<group>"; };
+		4DBF34662154D1D300BE0853 /* EFSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFSliderView.swift; sourceTree = "<group>"; };
+		4DBF34672154D1D300BE0853 /* EFThumbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFThumbView.swift; sourceTree = "<group>"; };
+		4DBF34682154D1D300BE0853 /* EFColorWheelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorWheelView.swift; sourceTree = "<group>"; };
+		4DBF34692154D1D300BE0853 /* EFRGBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFRGBView.swift; sourceTree = "<group>"; };
 		4DD66198214153C900083C25 /* RescribeNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RescribeNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD6619B214153C900083C25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DD661A0214153C900083C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -339,6 +367,49 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		4DBF34372154BA3D00BE0853 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF34382154BA5900BE0853 /* GridView.xib */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		4DBF343A2154BFC400BE0853 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF343B2154BFF000BE0853 /* GridView.swift */,
+				4DBF345B2154C97800BE0853 /* ViewEmbedder.swift */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		4DBF345D2154D13800BE0853 /* UIControls */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF345E2154D14500BE0853 /* ColorPicker */,
+			);
+			path = UIControls;
+			sourceTree = "<group>";
+		};
+		4DBF345E2154D14500BE0853 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF34622154D1D200BE0853 /* EFColorComponentView.swift */,
+				4DBF34602154D1D200BE0853 /* EFColorSelectionView.swift */,
+				4DBF34612154D1D200BE0853 /* EFColorSelectionViewController.swift */,
+				4DBF345F2154D1D200BE0853 /* EFColorUtils.swift */,
+				4DBF34642154D1D200BE0853 /* EFColorView.swift */,
+				4DBF34682154D1D300BE0853 /* EFColorWheelView.swift */,
+				4DBF34652154D1D300BE0853 /* EFControl.swift */,
+				4DBF34632154D1D200BE0853 /* EFHSBView.swift */,
+				4DBF34692154D1D300BE0853 /* EFRGBView.swift */,
+				4DBF34662154D1D300BE0853 /* EFSliderView.swift */,
+				4DBF34672154D1D300BE0853 /* EFThumbView.swift */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
 		4DD6618F214153C900083C25 = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +437,7 @@
 				4DD661AF214154DD00083C25 /* Controllers */,
 				4DD661B82141559A00083C25 /* Extension */,
 				4D0D359921429BEA00840427 /* SketchControls */,
+				4DBF345D2154D13800BE0853 /* UIControls */,
 			);
 			path = RescribeNotes;
 			sourceTree = "<group>";
@@ -409,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				4DD661B12141551C00083C25 /* CanvasViewController.swift */,
+				4DBF343A2154BFC400BE0853 /* Grid */,
 				4DDEBD8D21416560005D32A9 /* Template */,
 				4D0D356F2142599700840427 /* Tools */,
 				4D202E6A21465F87004B06D8 /* Toolbar */,
@@ -419,6 +492,7 @@
 		4DD661B32141553E00083C25 /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
+				4DBF34372154BA3D00BE0853 /* Grid */,
 				4D202E6521465E5C004B06D8 /* Toolbar */,
 				4D0D356A2142589C00840427 /* Tools */,
 				4DDEBD8E2141656B005D32A9 /* Template */,
@@ -583,6 +657,7 @@
 				4D0D35912142654D00840427 /* edit.png in Resources */,
 				4D0D35B22142B61500840427 /* rectangle.png in Resources */,
 				4D0D35962142654D00840427 /* crayon.png in Resources */,
+				4DBF34392154BA5900BE0853 /* GridView.xib in Resources */,
 				4DDEBD9B21416878005D32A9 /* dummy2.png in Resources */,
 				4D202E9B2147CCBF004B06D8 /* crossGridThumb.png in Resources */,
 				4D202E892147A13E004B06D8 /* Roboto-Regular.ttf in Resources */,
@@ -630,7 +705,6 @@
 				"${BUILT_PRODUCTS_DIR}/AssetsPickerViewController/AssetsPickerViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Device/Device.framework",
 				"${BUILT_PRODUCTS_DIR}/Dimmer/Dimmer.framework",
-				"${BUILT_PRODUCTS_DIR}/EFColorPicker/EFColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/FadeView/FadeView.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftARGB/SwiftARGB.framework",
@@ -642,7 +716,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AssetsPickerViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dimmer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FadeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftARGB.framework",
@@ -663,20 +736,29 @@
 			files = (
 				4D202E8C2147A23C004B06D8 /* Roboto-Bold.ttf in Sources */,
 				4D202E8D2147A23C004B06D8 /* Roboto-Light.ttf in Sources */,
+				4DBF34702154D1D300BE0853 /* EFControl.swift in Sources */,
 				4D202E8E2147A23C004B06D8 /* Roboto-Medium.ttf in Sources */,
+				4DBF346D2154D1D300BE0853 /* EFColorComponentView.swift in Sources */,
 				4D202EB6214BB19B004B06D8 /* SelectTool.swift in Sources */,
+				4DBF346A2154D1D300BE0853 /* EFColorUtils.swift in Sources */,
 				4D202E8F2147A23C004B06D8 /* Roboto-Regular.ttf in Sources */,
+				4DBF34712154D1D300BE0853 /* EFSliderView.swift in Sources */,
 				4D0D359D21429C1400840427 /* SketchView.swift in Sources */,
 				4D202EB2214B8B8C004B06D8 /* TextFieldTool.swift in Sources */,
 				4DBF33972152127D00BE0853 /* ArrowTool.swift in Sources */,
 				4DBF33952152126400BE0853 /* LineTool.swift in Sources */,
+				4DBF345C2154C97800BE0853 /* ViewEmbedder.swift in Sources */,
+				4DBF34722154D1D300BE0853 /* EFThumbView.swift in Sources */,
 				4DDEBD8821415AC4005D32A9 /* NibView.swift in Sources */,
+				4DBF346C2154D1D300BE0853 /* EFColorSelectionViewController.swift in Sources */,
+				4DBF343C2154BFF000BE0853 /* GridView.swift in Sources */,
 				4D202E8B2147A166004B06D8 /* UIFontExtension.swift in Sources */,
 				4DD661BA214155E400083C25 /* UIViewExtension.swift in Sources */,
 				4D202E6E21465FC9004B06D8 /* ToolBarCell.swift in Sources */,
 				4DBF339F215212FE00BE0853 /* EraserTool.swift in Sources */,
 				4DBF339D215212E100BE0853 /* StampTool.swift in Sources */,
 				4DD661B22141551C00083C25 /* CanvasViewController.swift in Sources */,
+				4DBF346E2154D1D300BE0853 /* EFHSBView.swift in Sources */,
 				4DD661BC2141564E00083C25 /* TemplatePalatteView.swift in Sources */,
 				4D0D35A32142B26100840427 /* ShapeToolCell.swift in Sources */,
 				4D202E6C21465FB5004B06D8 /* ToolbarView.swift in Sources */,
@@ -687,11 +769,15 @@
 				4DBF33992152129F00BE0853 /* RectTool.swift in Sources */,
 				4D202EA72147D44F004B06D8 /* UIImageExtension.swift in Sources */,
 				4D0D3571214259B300840427 /* ToolsPalatteView.swift in Sources */,
+				4DBF34742154D1D300BE0853 /* EFRGBView.swift in Sources */,
+				4DBF346B2154D1D300BE0853 /* EFColorSelectionView.swift in Sources */,
+				4DBF34732154D1D300BE0853 /* EFColorWheelView.swift in Sources */,
 				4D0D359C21429C1400840427 /* SketchTool.swift in Sources */,
 				4D0D35A52142B28000840427 /* ShapePickerPalatte.swift in Sources */,
 				4D202EB4214B8BBC004B06D8 /* ImageViewTool.swift in Sources */,
 				4DD6619C214153C900083C25 /* AppDelegate.swift in Sources */,
 				4D202E702146758F004B06D8 /* SliderView.swift in Sources */,
+				4DBF346F2154D1D300BE0853 /* EFColorView.swift in Sources */,
 				4DBF339B215212BB00BE0853 /* EllipseTool.swift in Sources */,
 				4D0D357521425B7B00840427 /* ToolCell.swift in Sources */,
 			);
