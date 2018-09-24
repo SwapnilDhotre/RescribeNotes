@@ -40,9 +40,6 @@ class ImageViewTool: UIImageView, SketchTool {
     touchPoint = CGPoint(x: 0, y: 0)
 
     super.init(frame: CGRect(x: 0, y: 0, width: self.width, height: height))
-
-    self.setDashedBorder()
-    self.setDropShadow()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -69,6 +66,17 @@ class ImageViewTool: UIImageView, SketchTool {
   func setInitialPoint(_ firstPoint: CGPoint) {
     self.touchPoint = firstPoint
     print("Initiated position")
+
+    let width = self.image?.size.width ?? 0
+    let height = self.image?.size.height ?? 0
+
+    let ratio = width / height
+    self.width = self.height * (ratio) // Height is considered as 150
+    self.actualWidth = self.width
+
+    self.frame = CGRect(x: 0, y: 0, width: self.width, height: self.height) // Update frame
+    self.setDashedBorder()
+    self.setDropShadow()
 
     self.addPanGesture(view: self)
     self.addRotateGesture(view: self)

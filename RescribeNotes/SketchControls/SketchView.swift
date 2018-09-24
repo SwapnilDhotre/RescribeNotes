@@ -35,21 +35,22 @@ public enum ImageRenderingMode {
 }
 
 public class SketchView: UIView {
-  public var lineColor = UIColor.black
+  public var lineColor = UIColor.black {
+    didSet {
+      self.selectedTextfieldView?.lineColor = self.lineColor
+    }
+  }
   public var lineWidth = CGFloat(10)
   public var lineAlpha = CGFloat(1)
   public var stampImage: UIImage?
   public var drawTool: SketchToolType = .pen {
-
-//    willSet {
-//      if self.imageViewSelected && !(self.currentTool is SelectTool) {
-//        self.drawImage()
-//      }
-//    }
     didSet {
       sketchViewDelegate?.drawToolChanged?(selectedTool: self.drawTool)
     }
   }
+
+  private var previousLineWidth: CGFloat = 0
+
   public var drawingPenType: PenType = .normal
   public var sketchViewDelegate: SketchViewDelegate?
   public var currentSelectedImage: UIImage?
@@ -67,7 +68,9 @@ public class SketchView: UIView {
   var dragTools: [SelectTool] = []
 
   var imageViewSelected: Bool = false
+  var selectedTextfieldView: TextFieldTool?
   var lastPanPoint: CGPoint?
+  var eraserView: UIView?
 
   public override init(frame: CGRect) {
     super.init(frame: frame)
@@ -81,6 +84,7 @@ public class SketchView: UIView {
 
   private func prepareForInitial() {
     backgroundColor = UIColor.clear
+    self.previousLineWidth = self.lineWidth
 
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: Notification.Name.UIKeyboardWillHide, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: Notification.Name.UIKeyboardWillShow, object: nil)
@@ -115,6 +119,7 @@ public class SketchView: UIView {
 
   @objc func keyboardWillDisappear() {
     self.keyboardVisible = false
+    self.selectedTextfieldView = nil
   }
 
   func drawImage() {
@@ -134,6 +139,26 @@ public class SketchView: UIView {
       finishDrawing()
       self.drawTool = .pen
     }
+  }
+
+  func getEditedImage() -> UIImage? {
+
+    UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+    image?.draw(at: .zero)
+
+    for tool in self.subviews {
+      if let tool: TextFieldTool = tool as? TextFieldTool {
+        tool.shouldDraw = true
+        tool.draw()
+        tool.removeFromSuperview()
+      }
+    }
+    image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
+    self.setNeedsLayout()
+
+    return self.image
   }
 
   func getSelectTool() -> SelectTool? {
@@ -199,10 +224,8 @@ public class SketchView: UIView {
             }
 
           } else if let tool: SelectTool = tool as? SelectTool {
-
-            tool.shouldDraw = true
+            tool.shouldDraw = true // This is usefull in undo/redo
             tool.draw()
-            self.setNeedsLayout()
           } else {
             tool.draw()
           }
@@ -219,7 +242,6 @@ public class SketchView: UIView {
         self.imageViewSelected = true
         self.addSubview(tool)
       } else if let tool: SelectTool = currentTool as? SelectTool {
-        tool.shouldDraw = true
         tool.draw()
       } else {
         currentTool?.draw()
@@ -272,6 +294,24 @@ public class SketchView: UIView {
     }
   }
 
+  private func createEraserView() {
+
+    self.previousLineWidth = self.lineWidth
+    self.lineWidth = 40
+
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: self.lineWidth - 2, height: self.lineWidth - 2))
+    view.center = currentPoint!
+    view.backgroundColor = .white
+    view.borderColor = .black
+    view.borderWidth = 1
+    view.cornerRadius = view.frame.width / 2
+    view.roundCorners(corners: .allCorners, radius: 30)
+    view.tag = 100
+    self.addSubview(view)
+
+    self.eraserView = view
+  }
+
   public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     guard let touch = touches.first else { return }
 
@@ -300,6 +340,12 @@ public class SketchView: UIView {
       pathArray.add(penTool)
       penTool.drawingPenType = drawingPenType
       penTool.setInitialPoint(currentPoint!)
+
+      if drawTool == .eraser {
+        self.createEraserView()
+        currentTool?.lineWidth = lineWidth
+      }
+
     case is StampTool:
       guard let stampTool = currentTool as? StampTool else { return }
       pathArray.add(stampTool)
@@ -337,6 +383,9 @@ public class SketchView: UIView {
     if let penTool = currentTool as? PenTool {
       let renderingBox = penTool.createBezierRenderingBox(previousPoint2!, widhPreviousPoint: previousPoint1!, withCurrentPoint: currentPoint!)
 
+      if self.drawTool == .eraser {
+        self.eraserView?.center = currentPoint! // Only used when eraser is used
+      }
       setNeedsDisplay(renderingBox)
     } else {
       currentTool?.moveFromPoint(previousPoint1!, toPoint: currentPoint!)
@@ -346,6 +395,12 @@ public class SketchView: UIView {
 
   public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     touchesMoved(touches, with: event)
+
+    if self.drawTool == .eraser {
+      self.drawTool = .pen
+      self.lineWidth = self.previousLineWidth
+      self.eraserView?.removeFromSuperview() // Used only when eraser is activated
+    }
     finishDrawing()
   }
 
@@ -368,9 +423,7 @@ public class SketchView: UIView {
     updateCacheImage(true)
 
     for view in self.subviews {
-      if view is ImageViewTool {
-        view.removeFromSuperview()
-      }
+      view.removeFromSuperview()
     }
 
     setNeedsDisplay()

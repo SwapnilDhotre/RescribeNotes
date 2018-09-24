@@ -10,7 +10,11 @@ import UIKit
 
 class TextFieldTool: UIView, SketchTool {
   var lineWidth: CGFloat
-  var lineColor: UIColor
+  var lineColor: UIColor {
+    didSet {
+      self.textField?.textColor = self.lineColor
+    }
+  }
   var lineAlpha: CGFloat
   var touchPoint: CGPoint
 
@@ -18,6 +22,10 @@ class TextFieldTool: UIView, SketchTool {
   var width: CGFloat = 40
   var height: CGFloat = 50
   var rotationCalled: Bool = false
+  var shouldDraw = false
+
+  var actualWidth: CGFloat = 0
+  var actualHeight: CGFloat = 0
 
   var textFieldWidth: CGFloat = 5 {
     didSet {
@@ -55,7 +63,7 @@ class TextFieldTool: UIView, SketchTool {
     self.createTextField()
 
     self.createPanView()
-    self.addRotateGesture(view: self)
+//    self.addRotateGesture(view: self)
 
     //    let imageView = UIImageView()
     //    imageView.image = #imageLiteral(resourceName: "refresh.png")
@@ -81,6 +89,34 @@ class TextFieldTool: UIView, SketchTool {
     self.bounds = CGRect(x: 0, y: 0, width: self.width, height: self.height)
     self.center.x = touchPoint.x
     self.center.y = touchPoint.y
+    self.textField?.textColor = self.lineColor
+
+    if shouldDraw, let context: CGContext = UIGraphicsGetCurrentContext() {
+
+      context.setShadow(offset: CGSize(width: 0, height: 0), blur: 0, color: nil)
+
+      let imageWidth = self.actualWidth
+      let imageHeight = self.actualHeight
+
+      let originX = self.touchPoint.x - (imageWidth / 2)
+      let originY = self.touchPoint.y - (imageHeight / 2)
+
+      if let image = self.imageFromView(myView: self) {
+      // Below is direct Image draw
+        image.draw(in: CGRect(x: originX, y: originY, width: imageWidth, height: imageHeight))
+      }
+      print("Now text is written")
+    }
+  }
+
+  func imageFromView(myView: UIView) -> UIImage? {
+
+    UIGraphicsBeginImageContextWithOptions(myView.bounds.size, false, UIScreen.main.scale)
+    myView.drawHierarchy(in: myView.bounds, afterScreenUpdates: true)
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
+    return image
   }
 
   // MARK: - Do Setup
@@ -93,7 +129,7 @@ class TextFieldTool: UIView, SketchTool {
 
     textField.textAlignment = .center
     textField.font = self.font
-    textField.textColor = .black
+    textField.textColor = self.lineColor
     textField.layer.backgroundColor = UIColor.clear.cgColor
     textField.autocorrectionType = .no
     textField.addTarget(self, action: #selector(self.textField(didChange:)), for: .editingChanged)
@@ -158,6 +194,7 @@ extension TextFieldTool: UITextFieldDelegate {
   }
 
   func textFieldDidBeginEditing(_ textField: UITextField) {
+    (self.superview as? SketchView)?.selectedTextfieldView = self
     textField.borderColor = UIColor.red
   }
 
@@ -252,11 +289,15 @@ extension TextFieldTool: UIGestureRecognizerDelegate {
                                          height: sizeToFit.height)
         }
 
+        textField.textColor = self.lineColor
         textField.setNeedsDisplay()
       } else {
         view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
       }
       recognizer.scale = 1
+
+      self.actualWidth = view.frame.width
+      self.actualHeight = view.frame.height
     }
   }
 

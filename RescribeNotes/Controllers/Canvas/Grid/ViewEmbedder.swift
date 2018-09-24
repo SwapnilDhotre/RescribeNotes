@@ -22,9 +22,16 @@ class ViewEmbedder {
     parent.addChildViewController(child)
     container.addSubview(child.view)
     child.didMove(toParentViewController: parent)
-    let w = container.frame.size.width;
-    let h = container.frame.size.height;
-    child.view.frame = CGRect(x: 0, y: 0, width: w, height: h)
+
+    child.view.translatesAutoresizingMaskIntoConstraints = false
+    child.view.topAnchor.constraint(equalTo: container.topAnchor, constant: 5).isActive = true
+    child.view.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 5).isActive = true
+    child.view.rightAnchor.constraint(equalTo: container.rightAnchor, constant: 5).isActive = true
+    child.view.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: 5).isActive = true
+
+//    let w = container.frame.size.width - 20;
+//    let h = container.frame.size.height;
+//    child.view.frame = CGRect(x: 0, y: 0, width: w, height: h)
   }
 
   class func removeFromParent(vc:UIViewController){
@@ -33,12 +40,12 @@ class ViewEmbedder {
     vc.removeFromParentViewController()
   }
 
-  class func embed(withIdentifier id: String, parent: UIViewController, container: UIView, completion:((UIViewController)->Void)? = nil){
+  class func embed(withIdentifier id: String, parent: UIViewController, container: UIView, defaultColor: UIColor, completion:((UIViewController)->Void)? = nil){
 //    let vc = parent.storyboard!.instantiateViewController(withIdentifier: id)
 
     let colorSelectionController = EFColorSelectionViewController()
     colorSelectionController.delegate = (container.superview as! GridView)
-    colorSelectionController.color = container.backgroundColor ?? UIColor.white
+    colorSelectionController.color = defaultColor
     colorSelectionController.preferredContentSize = colorSelectionController.view.systemLayoutSizeFitting(
       UILayoutFittingCompressedSize
     )

@@ -118,6 +118,48 @@
             </objects>
             <point key="canvasLocation" x="799.21875" y="39.84375"/>
         </scene>
+        <!--Image Viewer Controller-->
+        <scene sceneID="2B8-Gm-qzz">
+            <objects>
+                <viewController storyboardIdentifier="imageViewerController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Egq-AL-yUR" customClass="ImageViewerController" customModule="RescribeNotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="npu-Rs-WN2">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nDy-7f-ROy">
+                                <rect key="frame" x="10" y="30" width="748" height="984"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1C3-aB-KBj" firstAttribute="bottom" secondItem="nDy-7f-ROy" secondAttribute="bottom" constant="10" id="JkF-ef-qyZ"/>
+                            <constraint firstItem="1C3-aB-KBj" firstAttribute="trailing" secondItem="nDy-7f-ROy" secondAttribute="trailing" constant="10" id="cgn-Ft-p32"/>
+                            <constraint firstItem="nDy-7f-ROy" firstAttribute="leading" secondItem="1C3-aB-KBj" secondAttribute="leading" constant="10" id="gY7-Mm-6qa"/>
+                            <constraint firstItem="nDy-7f-ROy" firstAttribute="top" secondItem="1C3-aB-KBj" secondAttribute="top" constant="10" id="p7P-fJ-dcy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1C3-aB-KBj"/>
+                    </view>
+                    <connections>
+                        <outlet property="completeImage" destination="nDy-7f-ROy" id="juB-bO-9d4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mkt-NL-ZDK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1486" y="42"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="fhT-nm-ef5">
             <objects>

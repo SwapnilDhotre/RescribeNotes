@@ -51,12 +51,18 @@ class CanvasViewController: UIViewController {
   }
 
   @IBOutlet var backgroundImage: UIImageView!
-  
+
+  // Grid Lines
+  var lineThickness: CGFloat = 0.5
+  var lineGap: CGFloat = 20
+  var lineColor: UIColor = .red
+
   // MARK: - Life Cycle Methods
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.setUIAppearance()
+    NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -68,6 +74,11 @@ class CanvasViewController: UIViewController {
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
+  }
+
+  @objc func rotated() {
+
+    self.drawGrid(lineWidth: self.lineThickness, gap: self.lineGap, color: self.lineColor)
   }
 
   // MARK: - Custom Methods
@@ -93,6 +104,8 @@ class CanvasViewController: UIViewController {
 
     self.sketchView.sketchViewDelegate = self
     self.addClearButton()
+
+    self.addSaveButton()
   }
 
   func drawGrid(lineWidth: CGFloat, gap: CGFloat, color: UIColor) {
@@ -135,10 +148,32 @@ class CanvasViewController: UIViewController {
     UIGraphicsEndImageContext();
   }
 
+  func addSaveButton() {
+    let saveBarButton = UIBarButtonItem(title: "Save", style: .done, target: self, action:  #selector(self.saveImage))
+    self.navigationItem.rightBarButtonItem  = saveBarButton
+  }
+
+  @objc func saveImage() {
+
+    if let image = self.sketchView.getEditedImage() {
+
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      if let controller = storyboard.instantiateViewController(withIdentifier: "imageViewerController") as? ImageViewerController {
+        controller.image = image
+        self.navigationController?.pushViewController(controller, animated: true)
+      }
+    }
+  }
+
   func addClearButton() {
 
-    let clearBarButton = UIBarButtonItem(title: "Clear All", style: .done, target: self, action:  #selector(self.clearAll))
-    self.navigationItem.leftBarButtonItem  = clearBarButton
+    let clearBarButton = UIBarButtonItem(title: "Clear All", style: .done, target: self, action: #selector(self.clearAll))
+
+    let saveBarButton = UIBarButtonItem(title: "Save", style: .done, target: self, action:  #selector(self.saveImage))
+
+    let barButtons: Array = [clearBarButton, saveBarButton]
+
+    self.navigationItem.leftBarButtonItems = barButtons
   }
 
   func addDoneBarButton() {
@@ -412,16 +447,24 @@ class CanvasViewController: UIViewController {
 
   @IBAction func gridBtnTapped(_ sender: UIButton) {
 
+    self.showGridColorPicker(sourceView: sender)
+  }
+
+  func showGridColorPicker(sourceView: UIView) {
+
     let alertController = UIAlertController(title: "Pick Report", message: nil, preferredStyle: .actionSheet)
 
     let height: CGFloat = 550
     let view: GridView = GridView.fromNib()
+    view.sliderLineThickness.setValue(Float(self.lineThickness), animated: true)
+    view.sliderGapSpace.setValue(Float(self.lineGap), animated: true)
     view.delegate = self
 
     ViewEmbedder.embed(
       withIdentifier: "MyVC", // Storyboard ID
       parent: alertController,
-      container: view.colorPalatteView) { vc in
+      container: view.colorPalatteView,
+      defaultColor: self.lineColor) { (vc) in
         // do things when embed complete
         print("Embedding completed")
     }
@@ -446,8 +489,8 @@ class CanvasViewController: UIViewController {
     // Show Action sheet according to device
     if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
       if let presenter = alertController.popoverPresentationController {
-        presenter.sourceView = sender
-        presenter.sourceRect = sender.bounds
+        presenter.sourceView = sourceView
+        presenter.sourceRect = sourceView.bounds
       }
 
       alertController.view.heightAnchor.constraint(equalToConstant: height + 55).isActive = true
@@ -459,20 +502,6 @@ class CanvasViewController: UIViewController {
       present(alertController, animated: true, completion: nil)
     }
 
-  }
-
-  func showGridColorPicker(view: UIView) {
-
-    let height: CGFloat = 480
-    let tipView: SliderView = SliderView.fromNib()
-    tipView.lblSlider.text = "Tip Size: \(Int(self.tipSize))"
-    tipView.slider.setValue(Float(self.tipSize), animated: true)
-    tipView.slider.tag = 1
-    tipView.slider.addTarget(self, action: #selector(self.sliderValueChanged(_:_:)), for: UIControlEvents.valueChanged)
-
-    self.tipSizeSlider = tipView
-
-    self.showActionSheet(forView: tipView, sourceView: view, withTitle: "Pen - Size", customViewHeight: height)
   }
   
   @objc func clearAll() {
@@ -665,7 +694,8 @@ extension CanvasViewController: AssetsPickerViewControllerDelegate {
   func assetsPicker(controller _: AssetsPickerViewController, selected assets: [PHAsset]) {
 
     if let asset = assets.first, let pickedImage = self.getUIImage(asset: asset) {
-      self.sketchView.currentSelectedImage = pickedImage.fixOrientation()
+      let pickedImage = pickedImage.fixOrientation()
+      self.sketchView.currentSelectedImage = pickedImage
 //      self.sketchView.stampImage = pickedImage.fixOrientation()
     }
   }
@@ -692,8 +722,12 @@ extension CanvasViewController: AssetsPickerViewControllerDelegate {
   }
 }
 
+//MARK: - Grid Value changed
 extension CanvasViewController: GridManipulation {
   func gridValueChanged(lineThickness: CGFloat, gapSize: CGFloat, lineColor: UIColor) {
+    self.lineThickness = lineThickness
+    self.lineGap = gapSize
+    self.lineColor = lineColor
     self.drawGrid(lineWidth: lineThickness, gap: gapSize, color: lineColor)
   }
 }

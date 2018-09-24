@@ -15,6 +15,8 @@ class SelectTool: SketchTool {
   var imageTool: ImageViewTool?
   var shouldDraw: Bool = false
 
+  var touchPoint: CGPoint = CGPoint.zero
+
   init() {
     self.lineAlpha = 1
     self.lineWidth = 1
@@ -23,12 +25,17 @@ class SelectTool: SketchTool {
 
   func setInitialPoint(_ firstPoint: CGPoint) {}
 
-  func moveFromPoint(_ startPoint: CGPoint, toPoint endPoint: CGPoint) {}
+  func moveFromPoint(_ startPoint: CGPoint, toPoint endPoint: CGPoint) {
+    self.touchPoint = endPoint
+  }
 
   func draw() {
-    print("Tool drawn")
+    print("Tool draw called")
 
     if shouldDraw {
+
+      print("Tool drawn")
+
       let context: CGContext = UIGraphicsGetCurrentContext()!
       context.setShadow(offset: CGSize(width: 0, height: 0), blur: 0, color: nil)
 
@@ -57,8 +64,13 @@ class SelectTool: SketchTool {
         // Below is direct Image draw
         image.draw(in: CGRect(x: originX, y: originY, width: imageWidth, height: imageHeight))
 
+        self.shouldDraw = false
         print("Now image is written")
       }
+    } else {
+
+      self.imageTool?.center.x = touchPoint.x
+      self.imageTool?.center.y = touchPoint.y
     }
   }
 }

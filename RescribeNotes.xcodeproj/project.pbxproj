@@ -84,6 +84,7 @@
 		4DBF34722154D1D300BE0853 /* EFThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34672154D1D300BE0853 /* EFThumbView.swift */; };
 		4DBF34732154D1D300BE0853 /* EFColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34682154D1D300BE0853 /* EFColorWheelView.swift */; };
 		4DBF34742154D1D300BE0853 /* EFRGBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34692154D1D300BE0853 /* EFRGBView.swift */; };
+		4DBF34762158F55400BE0853 /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF34752158F55400BE0853 /* ImageViewerController.swift */; };
 		4DD6619C214153C900083C25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6619B214153C900083C25 /* AppDelegate.swift */; };
 		4DD661A1214153C900083C25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DD6619F214153C900083C25 /* Main.storyboard */; };
 		4DD661A3214153CC00083C25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DD661A2214153CC00083C25 /* Assets.xcassets */; };
@@ -183,6 +184,7 @@
 		4DBF34672154D1D300BE0853 /* EFThumbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFThumbView.swift; sourceTree = "<group>"; };
 		4DBF34682154D1D300BE0853 /* EFColorWheelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorWheelView.swift; sourceTree = "<group>"; };
 		4DBF34692154D1D300BE0853 /* EFRGBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFRGBView.swift; sourceTree = "<group>"; };
+		4DBF34752158F55400BE0853 /* ImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; };
 		4DD66198214153C900083C25 /* RescribeNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RescribeNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD6619B214153C900083C25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DD661A0214153C900083C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 			isa = PBXGroup;
 			children = (
 				4DD661B0214154FF00083C25 /* Canvas */,
+				4DBF34752158F55400BE0853 /* ImageViewerController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -758,6 +761,7 @@
 				4DBF339F215212FE00BE0853 /* EraserTool.swift in Sources */,
 				4DBF339D215212E100BE0853 /* StampTool.swift in Sources */,
 				4DD661B22141551C00083C25 /* CanvasViewController.swift in Sources */,
+				4DBF34762158F55400BE0853 /* ImageViewerController.swift in Sources */,
 				4DBF346E2154D1D300BE0853 /* EFHSBView.swift in Sources */,
 				4DD661BC2141564E00083C25 /* TemplatePalatteView.swift in Sources */,
 				4D0D35A32142B26100840427 /* ShapeToolCell.swift in Sources */,

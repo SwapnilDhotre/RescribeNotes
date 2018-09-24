@@ -37,14 +37,11 @@ class GridView: UIView {
     self.lblGapSpace.text = "Gap Space"
     self.lblGridLineThickness.text = "Line Thickness"
 
-    self.sliderLineThickness.setValue(Float(self.lineThickness), animated: true)
-    self.sliderGapSpace.setValue(Float(self.lineGap), animated: true)
-
     self.sliderLineThickness.minimumValue = 0.5
     self.sliderLineThickness.maximumValue = 3.0
 
     self.sliderGapSpace.minimumValue = 10
-    self.sliderGapSpace.maximumValue = 60
+    self.sliderGapSpace.maximumValue = 100
 
     self.sliderLineThickness.tag = 10
     self.sliderGapSpace.tag = 11
