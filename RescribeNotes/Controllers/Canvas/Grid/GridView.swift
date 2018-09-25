@@ -11,6 +11,7 @@ import UIKit
 protocol GridManipulation {
 
   func gridValueChanged(lineThickness: CGFloat, gapSize: CGFloat, lineColor: UIColor)
+  func shouldShowGrid(shouldShowGrid: Bool)
 }
 
 class GridView: UIView {
@@ -21,14 +22,15 @@ class GridView: UIView {
   var lineThickness: CGFloat = 0.5
   var lineGap: CGFloat = 20
   var lineColor: UIColor = .red
+  var isGridVisible: Bool = true
 
   @IBOutlet var lblGridLineThickness: UILabel!
   @IBOutlet var lblGapSpace: UILabel!
 
+  @IBOutlet var btnIsGridVisible: UISwitch!
   @IBOutlet var sliderLineThickness: UISlider!
   @IBOutlet var sliderGapSpace: UISlider!
   
-
   @IBOutlet var colorPalatteView: UIView!
 
   override func awakeFromNib() {
@@ -49,6 +51,14 @@ class GridView: UIView {
 
   override func layoutSubviews() {
     super.layoutSubviews()
+  }
+
+  
+
+  // MARK: - Action Events
+  @IBAction func isVisibleTapped(_ sender: UISwitch) {
+
+    self.delegate?.shouldShowGrid(shouldShowGrid: sender.isOn)
   }
 
   @IBAction func sliderValueChanged(_ sender: UISlider) {

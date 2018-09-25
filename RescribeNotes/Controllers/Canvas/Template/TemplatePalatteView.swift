@@ -18,6 +18,7 @@ enum TemplateImage: String {
   case crossGrid = "crossGrid"
   case graphPaper = "graphPaper"
   case peyoteGrid = "peyote"
+  case vertical = "vertical"
 
   var thumbIcon: UIImage {
     return UIImage(named: "\(self.rawValue)Thumb.png")!
@@ -52,7 +53,8 @@ class TemplatePalatteView: NibView {
       TemplateImage.grid,
       TemplateImage.crossGrid,
       TemplateImage.graphPaper,
-      TemplateImage.peyoteGrid
+      TemplateImage.peyoteGrid,
+      TemplateImage.vertical
     ]
 
     self.setUIAppearance()

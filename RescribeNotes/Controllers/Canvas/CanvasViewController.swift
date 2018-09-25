@@ -51,7 +51,9 @@ class CanvasViewController: UIViewController {
   }
 
   @IBOutlet var backgroundImage: UIImageView!
-
+  @IBOutlet var gridImage: UIImageView!
+  var gridDrawnOnBackground: UIImage?
+  
   // Grid Lines
   var lineThickness: CGFloat = 0.5
   var lineGap: CGFloat = 20
@@ -68,7 +70,7 @@ class CanvasViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.drawGrid(lineWidth: 1, gap: 50, color: UIColor.red.withAlphaComponent(1))
+    self.drawGrid(onImage: nil, lineWidth: self.lineThickness, gap: self.lineGap, color: self.lineColor)
     self.updateViewOnAppear()
   }
 
@@ -78,7 +80,7 @@ class CanvasViewController: UIViewController {
 
   @objc func rotated() {
 
-    self.drawGrid(lineWidth: self.lineThickness, gap: self.lineGap, color: self.lineColor)
+    self.drawGrid(onImage: nil, lineWidth: self.lineThickness, gap: self.lineGap, color: self.lineColor)
   }
 
   // MARK: - Custom Methods
@@ -105,15 +107,15 @@ class CanvasViewController: UIViewController {
     self.sketchView.sketchViewDelegate = self
     self.addClearButton()
 
-    self.addSaveButton()
+//    self.addSaveButton()
   }
 
-  func drawGrid(lineWidth: CGFloat, gap: CGFloat, color: UIColor) {
+  func drawGrid(onImage gridBackImage: UIImage?, lineWidth: CGFloat, gap: CGFloat, color: UIColor) {
 
-    let originalImage = UIImage()
-    let widthOfImage = self.backgroundImage.bounds.width
-    let heightOfImage = self.backgroundImage.bounds.height
-    UIGraphicsBeginImageContext(self.backgroundImage.bounds.size)
+    let originalImage = gridBackImage ?? UIImage()
+    let widthOfImage = self.gridImage.bounds.width
+    let heightOfImage = self.gridImage.bounds.height
+    UIGraphicsBeginImageContext(self.gridImage.bounds.size)
 
     // Pass 1: Draw the original image as the background
     originalImage.draw(at: CGPoint.zero)
@@ -141,7 +143,11 @@ class CanvasViewController: UIViewController {
 
     // Create new image
     if let image = UIGraphicsGetImageFromCurrentImageContext() {
-      self.backgroundImage.image = image
+      if gridBackImage == nil {
+        self.gridImage.image = image
+      } else {
+        self.gridDrawnOnBackground = image
+      }
     }
 
     // Tidy up
@@ -153,16 +159,51 @@ class CanvasViewController: UIViewController {
     self.navigationItem.rightBarButtonItem  = saveBarButton
   }
 
+  func imageFromView(myView: UIView) -> UIImage? {
+
+    UIGraphicsBeginImageContextWithOptions(myView.bounds.size, false, UIScreen.main.scale)
+    myView.drawHierarchy(in: myView.bounds, afterScreenUpdates: true)
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
+    return image
+  }
+
   @objc func saveImage() {
 
-    if let image = self.sketchView.getEditedImage() {
+    var backgroundImage = self.imageFromView(myView: self.backgroundImage)
+    let hasGridLine = !(self.gridImage.image == nil)
+    if hasGridLine {
+
+      let alert = UIAlertController(title: "Rescribe Notes", message: "Do you want save with grid?", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+        self.drawGrid(onImage: backgroundImage, lineWidth: self.lineThickness, gap: self.lineGap, color: self.lineColor)
+        backgroundImage = self.gridDrawnOnBackground
+
+        self.showImage(withBackgroundImage: backgroundImage)
+      }))
+      alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in
+
+        self.showImage(withBackgroundImage: backgroundImage)
+      }))
+
+      self.present(alert, animated: true, completion: nil)
+    } else {
+
+      self.showImage(withBackgroundImage: backgroundImage)
+    }
+
+  }
+
+  func showImage(withBackgroundImage backgroundImage: UIImage?) {
+
+    self.sketchView.getEditedImage(backgroundImage: backgroundImage) { (canvasImage: UIImage) in
 
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
       if let controller = storyboard.instantiateViewController(withIdentifier: "imageViewerController") as? ImageViewerController {
-        controller.image = image
+        controller.image = canvasImage
         self.navigationController?.pushViewController(controller, animated: true)
       }
-      
     }
   }
 
@@ -453,12 +494,14 @@ class CanvasViewController: UIViewController {
 
   func showGridColorPicker(sourceView: UIView) {
 
-    let alertController = UIAlertController(title: "Pick Report", message: nil, preferredStyle: .actionSheet)
+    let alertController = UIAlertController(title: "Grid", message: nil, preferredStyle: .actionSheet)
 
     let height: CGFloat = 550
     let view: GridView = GridView.fromNib()
     view.sliderLineThickness.setValue(Float(self.lineThickness), animated: true)
     view.sliderGapSpace.setValue(Float(self.lineGap), animated: true)
+    view.btnIsGridVisible.setOn(!(self.gridImage.image == nil), animated: true) 
+
     view.delegate = self
 
     ViewEmbedder.embed(
@@ -725,11 +768,19 @@ extension CanvasViewController: AssetsPickerViewControllerDelegate {
 
 //MARK: - Grid Value changed
 extension CanvasViewController: GridManipulation {
+  func shouldShowGrid(shouldShowGrid showGrid: Bool) {
+    if showGrid {
+      self.drawGrid(onImage: nil, lineWidth: self.lineThickness, gap: self.lineGap, color: self.lineColor)
+    } else {
+      self.gridImage.image = nil
+    }
+  }
+
   func gridValueChanged(lineThickness: CGFloat, gapSize: CGFloat, lineColor: UIColor) {
     self.lineThickness = lineThickness
     self.lineGap = gapSize
     self.lineColor = lineColor
-    self.drawGrid(lineWidth: lineThickness, gap: gapSize, color: lineColor)
+    self.drawGrid(onImage: nil, lineWidth: lineThickness, gap: gapSize, color: lineColor)
   }
 }
 

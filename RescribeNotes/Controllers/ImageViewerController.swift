@@ -21,8 +21,6 @@ class ImageViewerController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.completeImage.backgroundColor = .white
-
     if (self.image != nil) {
       self.completeImage.image = self.image!
     }
@@ -32,4 +30,6 @@ class ImageViewerController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+
+  
 }

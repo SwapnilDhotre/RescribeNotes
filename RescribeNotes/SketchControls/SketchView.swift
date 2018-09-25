@@ -141,7 +141,18 @@ public class SketchView: UIView {
     }
   }
 
-  func getEditedImage() -> UIImage? {
+  private func draw(backgroundImage: UIImage) {
+
+    self.backgroundImage = backgroundImage
+    self.updateCacheImage(true)
+    self.setNeedsDisplay()
+  }
+
+  func getEditedImage(backgroundImage: UIImage?, completion: (UIImage) -> ()) {
+
+    if backgroundImage != nil {
+      self.draw(backgroundImage: backgroundImage!)
+    }
 
     self.setNeedsDisplay()
     UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
@@ -158,8 +169,12 @@ public class SketchView: UIView {
     UIGraphicsEndImageContext()
 
     self.setNeedsDisplay()
-//    self.finishDrawing()
-    return self.image
+
+    completion(self.image!)
+
+    self.backgroundImage = nil
+    self.updateCacheImage(true)
+    self.setNeedsDisplay()
   }
 
   func getSelectTool() -> SelectTool? {
@@ -422,6 +437,7 @@ public class SketchView: UIView {
 
   public func clear() {
     self.drawTool = .pen
+    self.backgroundImage = nil
     resetTool()
     bufferArray.removeAllObjects()
     pathArray.removeAllObjects()
@@ -446,7 +462,7 @@ public class SketchView: UIView {
 
   public func loadImage(image: UIImage) {
     self.image = image
-    backgroundImage =  image.copy() as? UIImage
+    backgroundImage = image.copy() as? UIImage
     bufferArray.removeAllObjects()
     pathArray.removeAllObjects()
     updateCacheImage(true)

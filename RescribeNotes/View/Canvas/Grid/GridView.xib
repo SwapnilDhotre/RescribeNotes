@@ -57,16 +57,36 @@
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NQv-65-gVE">
-                    <rect key="frame" x="5" y="136" width="306" height="305"/>
+                    <rect key="frame" x="5" y="172" width="306" height="269"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Bd-Ub-sj5">
+                    <rect key="frame" x="20" y="136" width="113" height="31"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visible : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3o-W7-K6E">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="31"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAJ-Eb-eEH">
+                            <rect key="frame" x="64" y="0.0" width="51" height="31"/>
+                            <color key="tintColor" red="0.015686274510000001" green="0.6705882353" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="isVisibleTapped:" destination="bAe-0b-OGo" eventType="valueChanged" id="Tu5-wg-rsq"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="NQv-65-gVE" firstAttribute="top" secondItem="7Bd-Ub-sj5" secondAttribute="bottom" constant="5" id="0wN-pm-6qd"/>
+                <constraint firstItem="7Bd-Ub-sj5" firstAttribute="leading" secondItem="sSF-vg-eHO" secondAttribute="leading" constant="20" id="1dY-K7-AQq"/>
                 <constraint firstItem="sSF-vg-eHO" firstAttribute="bottom" secondItem="NQv-65-gVE" secondAttribute="bottom" constant="5" id="1hP-ap-GyQ"/>
                 <constraint firstItem="sSF-vg-eHO" firstAttribute="trailing" secondItem="NQv-65-gVE" secondAttribute="trailing" constant="5" id="5Ua-9A-PkL"/>
                 <constraint firstItem="D8T-kA-Ggj" firstAttribute="top" secondItem="pDV-5E-wd2" secondAttribute="bottom" constant="5" id="82A-m6-Fki"/>
-                <constraint firstItem="NQv-65-gVE" firstAttribute="top" secondItem="D8T-kA-Ggj" secondAttribute="bottom" constant="5" id="Dwv-ny-UoI"/>
+                <constraint firstItem="7Bd-Ub-sj5" firstAttribute="top" secondItem="D8T-kA-Ggj" secondAttribute="bottom" constant="5" id="I5i-G1-TC3"/>
                 <constraint firstItem="NQv-65-gVE" firstAttribute="leading" secondItem="sSF-vg-eHO" secondAttribute="leading" constant="5" id="Mwk-bk-rCD"/>
                 <constraint firstItem="pDV-5E-wd2" firstAttribute="top" secondItem="sSF-vg-eHO" secondAttribute="top" constant="15" id="PuR-qc-hhQ"/>
                 <constraint firstItem="pDV-5E-wd2" firstAttribute="leading" secondItem="sSF-vg-eHO" secondAttribute="leading" constant="15" id="WOn-TB-l1i"/>
@@ -79,6 +99,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="sSF-vg-eHO"/>
             <connections>
+                <outlet property="btnIsGridVisible" destination="hAJ-Eb-eEH" id="Gxg-0v-wQN"/>
                 <outlet property="colorPalatteView" destination="NQv-65-gVE" id="V2K-UC-olt"/>
                 <outlet property="lblGapSpace" destination="tT9-5c-gdw" id="yLj-Y5-vPM"/>
                 <outlet property="lblGridLineThickness" destination="nVf-Ba-5nD" id="bfa-of-7vE"/>

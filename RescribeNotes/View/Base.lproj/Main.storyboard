@@ -38,9 +38,12 @@
                                     <constraint firstAttribute="width" constant="130" id="e9m-xK-Nb1"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grid1.png" translatesAutoresizingMaskIntoConstraints="NO" id="ECu-nn-TJV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vertical.png" translatesAutoresizingMaskIntoConstraints="NO" id="unS-0D-wcp">
                                 <rect key="frame" x="25" y="109" width="718" height="890"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grid1.png" translatesAutoresizingMaskIntoConstraints="NO" id="ECu-nn-TJV">
+                                <rect key="frame" x="25" y="109" width="718" height="890"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
@@ -90,7 +93,10 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="-235"/>
                             </constraint>
                             <constraint firstItem="mzs-v9-5s0" firstAttribute="top" secondItem="IhC-Rc-B4T" secondAttribute="bottom" constant="5" id="QGJ-9g-67u"/>
+                            <constraint firstItem="unS-0D-wcp" firstAttribute="centerY" secondItem="ECu-nn-TJV" secondAttribute="centerY" id="SAK-Tn-Sv6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qxf-RO-ktM" secondAttribute="trailing" constant="-90" id="STY-kh-VkV"/>
+                            <constraint firstItem="unS-0D-wcp" firstAttribute="height" secondItem="ECu-nn-TJV" secondAttribute="height" id="VDw-Fb-mul"/>
+                            <constraint firstItem="unS-0D-wcp" firstAttribute="centerX" secondItem="ECu-nn-TJV" secondAttribute="centerX" id="WVN-SY-Chv"/>
                             <constraint firstAttribute="trailing" secondItem="IhC-Rc-B4T" secondAttribute="trailing" constant="25" id="ajt-Nd-9d5"/>
                             <constraint firstItem="ECu-nn-TJV" firstAttribute="height" secondItem="mzs-v9-5s0" secondAttribute="height" id="bmv-PI-iZa"/>
                             <constraint firstItem="ECu-nn-TJV" firstAttribute="centerY" secondItem="mzs-v9-5s0" secondAttribute="centerY" id="cAg-BR-msl"/>
@@ -99,13 +105,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mzs-v9-5s0" secondAttribute="bottom" constant="25" id="mgd-7H-oFW"/>
                             <constraint firstItem="Jxh-kP-YqP" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.8" id="n0q-eN-XWK"/>
                             <constraint firstItem="Qxf-RO-ktM" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="qsE-p9-oH8"/>
+                            <constraint firstItem="unS-0D-wcp" firstAttribute="width" secondItem="ECu-nn-TJV" secondAttribute="width" id="ttK-NE-4Ko"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Notes" id="DLx-jP-kde"/>
                     <connections>
-                        <outlet property="backgroundImage" destination="ECu-nn-TJV" id="eWJ-2h-Uxm"/>
+                        <outlet property="backgroundImage" destination="unS-0D-wcp" id="2AN-Tt-oH3"/>
                         <outlet property="gridButton" destination="3ZU-iQ-hPW" id="6wD-68-zOc"/>
+                        <outlet property="gridImage" destination="ECu-nn-TJV" id="JnE-VI-KMa"/>
                         <outlet property="sketchView" destination="mzs-v9-5s0" id="c75-IU-tgk"/>
                         <outlet property="templateLeftConstraint" destination="P0j-92-Rch" id="xGU-7m-hoa"/>
                         <outlet property="templateView" destination="Jxh-kP-YqP" id="dHD-PT-54l"/>
@@ -181,5 +189,6 @@
     </scenes>
     <resources>
         <image name="grid1.png" width="625" height="844"/>
+        <image name="vertical.png" width="680" height="907"/>
     </resources>
 </document>
