@@ -143,6 +143,7 @@ public class SketchView: UIView {
 
   func getEditedImage() -> UIImage? {
 
+    self.setNeedsDisplay()
     UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
     image?.draw(at: .zero)
 
@@ -156,8 +157,8 @@ public class SketchView: UIView {
     image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
 
-    self.setNeedsLayout()
-
+    self.setNeedsDisplay()
+//    self.finishDrawing()
     return self.image
   }
 
@@ -204,7 +205,9 @@ public class SketchView: UIView {
         if let tool = obj as? SketchTool {
           if let tool: TextFieldTool = tool as? TextFieldTool {
             tool.draw()
-            self.addSubview(tool)
+            if !tool.shouldDraw {
+              self.addSubview(tool)
+            }
           } else if let tool: ImageViewTool = tool as? ImageViewTool {
             if pathArray.count > index + 1 {
               if let _: SelectTool = pathArray[index + 1] as? SelectTool {
@@ -236,7 +239,9 @@ public class SketchView: UIView {
 
       if let tool: TextFieldTool = currentTool as? TextFieldTool {
         tool.draw()
-        self.addSubview(tool)
+        if !tool.shouldDraw {
+          self.addSubview(tool)
+        }
       } else if let tool: ImageViewTool = currentTool as? ImageViewTool {
         tool.draw()
         self.imageViewSelected = true

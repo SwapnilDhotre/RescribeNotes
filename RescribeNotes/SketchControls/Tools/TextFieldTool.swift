@@ -90,8 +90,11 @@ class TextFieldTool: UIView, SketchTool {
     self.center.x = touchPoint.x
     self.center.y = touchPoint.y
     self.textField?.textColor = self.lineColor
+    self.actualWidth = self.frame.width
+    self.actualHeight = self.frame.height
 
     if shouldDraw, let context: CGContext = UIGraphicsGetCurrentContext() {
+      self.textField?.resignFirstResponder()
 
       context.setShadow(offset: CGSize(width: 0, height: 0), blur: 0, color: nil)
 
@@ -106,6 +109,7 @@ class TextFieldTool: UIView, SketchTool {
         image.draw(in: CGRect(x: originX, y: originY, width: imageWidth, height: imageHeight))
       }
       print("Now text is written")
+      self.shouldDraw = false
     }
   }
 

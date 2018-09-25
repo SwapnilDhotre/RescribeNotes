@@ -162,6 +162,7 @@ class CanvasViewController: UIViewController {
         controller.image = image
         self.navigationController?.pushViewController(controller, animated: true)
       }
+      
     }
   }
 
