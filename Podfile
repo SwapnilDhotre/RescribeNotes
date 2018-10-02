@@ -7,7 +7,6 @@ target 'RescribeNotes' do
 
   pod 'AssetsPickerViewController'
   pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
-  pod 'SwiftMessages'
   # Pods for RescribeNotes
 
 end

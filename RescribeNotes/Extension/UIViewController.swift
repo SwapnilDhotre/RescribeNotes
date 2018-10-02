@@ -8,65 +8,9 @@
 
 import Foundation
 import SVProgressHUD
-import SwiftMessages
 import UIKit
 
 extension UIViewController {
-  
-  func showInternetNotAvailableMsg() {
-    // how network not available messages
-    let config = getMessageConfig()
-    
-    // Instantiate a message view from the provided card view layout. SwiftMessages searches for nib
-    // files in the main bundle first, so you can easily copy them into your project and make changes.
-    let view = MessageView.viewFromNib(layout: .messageView)
-    
-    // Theme message elements with the warning style.
-    view.configureTheme(.warning)
-    view.button?.isHidden = true
-    
-    // Add a drop shadow.
-    view.configureDropShadow()
-    
-    // Set message title, body, and icon. Here, we're overriding the default warning
-    // image with an emoji character.
-    let iconText = "🤔" // ["🤔", "😳", "🙄", "😶"].sm_random()!
-    view.configureContent(title: "Warning", body: "Internet seems not available.", iconText: iconText)
-    
-    SwiftMessages.show(config: config, view: view)
-  }
-  
-  func getMessageConfig() -> SwiftMessages.Config {
-    var config = SwiftMessages.Config()
-    
-    // Slide up from the bottom.
-    config.presentationStyle = .top
-    
-    // Display in a window at the specified window level: UIWindowLevelStatusBar
-    // displays over the status bar while UIWindowLevelNormal displays under.
-    config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
-    
-    // Disable the default auto-hiding behavior.
-    config.duration = .seconds(seconds: 2)
-    
-    // Dim the background like a popover view. Hide when the background is tapped.
-    config.dimMode = .gray(interactive: true)
-    
-    // Disable the interactive pan-to-hide gesture.
-    config.interactiveHide = true
-    
-    // Specify a status bar style to if the message is displayed directly under the status bar.
-    config.preferredStatusBarStyle = .lightContent
-    
-    // Specify one or more event listeners to respond to show and hide events.
-    config.eventListeners.append { event in
-      if case .didHide = event {
-        print("yep")
-      }
-    }
-    
-    return config
-  }
   
   /// Return view controller initialized with class
   ///

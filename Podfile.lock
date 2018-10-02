@@ -16,16 +16,12 @@ PODS:
   - PureLayout (3.0.2)
   - SVProgressHUD (2.2.5)
   - SwiftARGB (2.0.0)
-  - SwiftMessages (4.1.4):
-    - SwiftMessages/App (= 4.1.4)
-  - SwiftMessages/App (4.1.4)
   - TinyLog (2.0.7)
   - UIViewKVO (2.0.0)
 
 DEPENDENCIES:
   - AssetsPickerViewController
   - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
-  - SwiftMessages
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -35,7 +31,6 @@ SPEC REPOS:
     - FadeView
     - PureLayout
     - SwiftARGB
-    - SwiftMessages
     - TinyLog
     - UIViewKVO
 
@@ -56,10 +51,9 @@ SPEC CHECKSUMS:
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftARGB: 8727cfcdcfe8709e707a2391f1d5802a7c40dcad
-  SwiftMessages: 2c33fdee8b8f38dfc7e1036684456b505891da8c
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   UIViewKVO: 091f9e020d69e73c4bf5e5ef61cde7bff1c24bbf
 
-PODFILE CHECKSUM: 190fef0324ab41982ac1fa7045aa73140cce334c
+PODFILE CHECKSUM: 56d9d582c69ce17671e27bcee7b565a4026eca93
 
 COCOAPODS: 1.5.0
