@@ -44,7 +44,7 @@ extension UIViewController {
     
     // Display in a window at the specified window level: UIWindowLevelStatusBar
     // displays over the status bar while UIWindowLevelNormal displays under.
-    config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+    config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
     
     // Disable the default auto-hiding behavior.
     config.duration = .seconds(seconds: 2)
@@ -103,20 +103,20 @@ extension UIViewController {
   
   /// Show alert message popup with only message
   func showAlertWithTitleAndMessage(title: String, message: String) {
-    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
     present(alert, animated: true, completion: nil)
   }
   
   func showAlert(message msg: String) {
-    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
     present(alert, animated: true, completion: nil)
   }
   
   func showAlert(message msg: String, _ completion: @escaping () -> Void) {
-    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
       
       completion()
     }))
@@ -135,13 +135,13 @@ extension UIViewController {
       msg = "Oops! Something went wrong! Please try again or contact customer care."
     }
     
-    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
     present(alert, animated: true, completion: nil)
   }
   
   func showAlertWithCompletionHandler(message msg: String) {
-    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertController.Style.alert)
     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {
       _ in
       self.dissmissCurrentViewController()
@@ -154,7 +154,7 @@ extension UIViewController {
   }
   
   func showAlertWithDismissingController(message msg: String) {
-    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+    let alert = UIAlertController(title: Constants.appName, message: msg, preferredStyle: UIAlertController.Style.alert)
     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {
       _ in
       self.dismissingController()
@@ -169,7 +169,7 @@ extension UIViewController {
   /// Show alert message popup with title and message
   func showAlert(title: String, message msg: String, complition: (() -> Void)?) {
 
-    let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+    let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {
       _ in
       complition?()
@@ -178,14 +178,14 @@ extension UIViewController {
   }
 
   func showAlert(title: String, message msg: String) {
-    let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
     present(alert, animated: true, completion: nil)
   }
   
   func showAlertMessageWithIndex(index _: Int) {
-    let alert = UIAlertController(title: Constants.appName, message: "", preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    let alert = UIAlertController(title: Constants.appName, message: "", preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
     present(alert, animated: true, completion: nil)
   }
   

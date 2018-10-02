@@ -122,7 +122,7 @@ class EFColorWheelView: UIControl {
         if dist <= radius {
             self.ef_colorWheelValueWithPosition(position: point, hue: &hue, saturation: &saturation)
             self.setSelectedPoint(point: point)
-            self.sendActions(for: UIControlEvents.valueChanged)
+            self.sendActions(for: UIControl.Event.valueChanged)
         }
     }
 

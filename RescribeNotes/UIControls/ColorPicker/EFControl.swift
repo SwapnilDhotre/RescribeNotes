@@ -40,7 +40,7 @@ class EFControl: UIControl {
             return super.point(inside: point, with: event)
         }
 
-        let hitFrame: CGRect = UIEdgeInsetsInsetRect(self.bounds, self.hitTestEdgeInsets)
+        let hitFrame: CGRect = self.bounds.inset(by: self.hitTestEdgeInsets)
         return hitFrame.contains(point)
     }
 }

@@ -18,10 +18,10 @@ class ViewEmbedder {
     if let previous = previous {
       removeFromParent(vc: previous)
     }
-    child.willMove(toParentViewController: parent)
-    parent.addChildViewController(child)
+    child.willMove(toParent: parent)
+    parent.addChild(child)
     container.addSubview(child.view)
-    child.didMove(toParentViewController: parent)
+    child.didMove(toParent: parent)
 
     child.view.translatesAutoresizingMaskIntoConstraints = false
     child.view.topAnchor.constraint(equalTo: container.topAnchor, constant: 5).isActive = true
@@ -35,9 +35,9 @@ class ViewEmbedder {
   }
 
   class func removeFromParent(vc:UIViewController){
-    vc.willMove(toParentViewController: nil)
+    vc.willMove(toParent: nil)
     vc.view.removeFromSuperview()
-    vc.removeFromParentViewController()
+    vc.removeFromParent()
   }
 
   class func embed(withIdentifier id: String, parent: UIViewController, container: UIView, defaultColor: UIColor, completion:((UIViewController)->Void)? = nil){
@@ -47,14 +47,14 @@ class ViewEmbedder {
     colorSelectionController.delegate = (parent as! GridViewController)
     colorSelectionController.color = defaultColor
     colorSelectionController.preferredContentSize = colorSelectionController.view.systemLayoutSizeFitting(
-      UILayoutFittingCompressedSize
+      UIView.layoutFittingCompressedSize
     )
 
     embed(
       parent: parent,
       container: container,
       child: colorSelectionController,
-      previous: parent.childViewControllers.first
+      previous: parent.children.first
     )
     completion?(colorSelectionController)
   }

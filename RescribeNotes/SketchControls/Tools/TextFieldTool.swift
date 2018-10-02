@@ -343,7 +343,7 @@ extension TextFieldTool: UIGestureRecognizerDelegate {
 
     if let textFieldTool: TextFieldTool = view as? TextFieldTool, let sketchView: SketchView = textFieldTool.superview as? SketchView {
 
-      sketchView.bringSubview(toFront: textFieldTool)
+      sketchView.bringSubviewToFront(textFieldTool)
       let pointToSuperView = recognizer.location(in: sketchView)
 
       textFieldTool.center = CGPoint(x: textFieldTool.center.x + recognizer.translation(in: sketchView).x,

@@ -158,7 +158,7 @@ extension ImageViewTool: UIGestureRecognizerDelegate {
    Scale Effect
    */
   func scaleEffect(view: UIView) {
-    view.superview?.bringSubview(toFront: view)
+    view.superview?.bringSubviewToFront(view)
 
     if #available(iOS 10.0, *) {
       let generator = UIImpactFeedbackGenerator(style: .heavy)
@@ -290,7 +290,7 @@ extension ImageViewTool: UIGestureRecognizerDelegate {
 
     if let imageTool: ImageViewTool = view as? ImageViewTool, let sketchView: SketchView = imageTool.superview as? SketchView {
 
-      sketchView.bringSubview(toFront: imageTool)
+      sketchView.bringSubviewToFront(imageTool)
       let pointToSuperView = recognizer.location(in: sketchView)
 
       imageTool.center = CGPoint(x: imageTool.center.x + recognizer.translation(in: sketchView).x,

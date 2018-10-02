@@ -85,7 +85,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
     // MARK:- UITextFieldDelegate methods
     public func textFieldDidEndEditing(_ textField: UITextField) {
         self.value = CGFloat(Double(textField.text ?? "") ?? 0)
-        self.sendActions(for: UIControlEvents.valueChanged)
+        self.sendActions(for: UIControl.Event.valueChanged)
     }
 
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -128,7 +128,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
         slider.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(slider)
 
-        textField.borderStyle = UITextBorderStyle.roundedRect
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numbersAndPunctuation
         textField.isHidden = !colorTextFieldEnabled
@@ -136,7 +136,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
 
         self.value = 0.0
 
-        slider.addTarget(self, action: #selector(ef_didChangeSliderValue(sender:)), for: UIControlEvents.valueChanged)
+        slider.addTarget(self, action: #selector(ef_didChangeSliderValue(sender:)), for: UIControl.Event.valueChanged)
         textField.delegate = self
 
         self.ef_installConstraints()
@@ -144,7 +144,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
 
     @objc private func ef_didChangeSliderValue(sender: EFSliderView) {
         self.value = sender.value
-        self.sendActions(for: UIControlEvents.valueChanged)
+        self.sendActions(for: UIControl.Event.valueChanged)
     }
 
     private func ef_installConstraints() {
@@ -163,7 +163,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.addConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "H:|[label(label_width)]-spacing-[slider]-spacing-[textField(textfield_width)]|",
-                    options: NSLayoutFormatOptions.alignAllCenterY,
+                    options: NSLayoutConstraint.FormatOptions.alignAllCenterY,
                     metrics: metrics,
                     views: views
                 )
@@ -171,7 +171,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.addConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "V:|[label]|",
-                    options: NSLayoutFormatOptions(rawValue: 0),
+                    options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: views
                 )
@@ -179,7 +179,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.addConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "V:|[textField]|",
-                    options: NSLayoutFormatOptions(rawValue: 0),
+                    options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: views
                 )
@@ -196,7 +196,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.addConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "H:|[label(label_width)]-spacing-[slider]-spacing-|",
-                    options: NSLayoutFormatOptions.alignAllCenterY,
+                    options: NSLayoutConstraint.FormatOptions.alignAllCenterY,
                     metrics: metrics,
                     views: views
                 )
@@ -204,7 +204,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.addConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "V:|[label]|",
-                    options: NSLayoutFormatOptions(rawValue: 0),
+                    options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: views
                 )
@@ -228,7 +228,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.removeConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "H:|[label(label_width)]-spacing-[slider]-spacing-[textField(textfield_width)]|",
-                    options: NSLayoutFormatOptions.alignAllCenterY,
+                    options: NSLayoutConstraint.FormatOptions.alignAllCenterY,
                     metrics: metrics,
                     views: views
                 )
@@ -236,7 +236,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.removeConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "V:|[label]|",
-                    options: NSLayoutFormatOptions(rawValue: 0),
+                    options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: views
                 )
@@ -244,7 +244,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.removeConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "V:|[textField]|",
-                    options: NSLayoutFormatOptions(rawValue: 0),
+                    options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: views
                 )
@@ -261,7 +261,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.removeConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "H:|[label(label_width)]-spacing-[slider]-spacing-|",
-                    options: NSLayoutFormatOptions.alignAllCenterY,
+                    options: NSLayoutConstraint.FormatOptions.alignAllCenterY,
                     metrics: metrics,
                     views: views
                 )
@@ -269,7 +269,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
             self.removeConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "V:|[label]|",
-                    options: NSLayoutFormatOptions(rawValue: 0),
+                    options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: views
                 )

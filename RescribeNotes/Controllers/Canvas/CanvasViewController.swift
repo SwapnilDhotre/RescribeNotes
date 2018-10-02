@@ -69,7 +69,7 @@ class CanvasViewController: UIViewController {
 
     self.setDefaultValue()
     self.setUIAppearance()
-    NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -129,8 +129,8 @@ class CanvasViewController: UIViewController {
 
     self.setSelectedTemplateShadow()
 
-    self.view.bringSubview(toFront: self.templateView)
-    self.view.bringSubview(toFront: self.toolsPalatteView)
+    self.view.bringSubviewToFront(self.templateView)
+    self.view.bringSubviewToFront(self.toolsPalatteView)
   }
 
   func setSelectedTemplateShadow() {
@@ -390,14 +390,14 @@ class CanvasViewController: UIViewController {
       navCtrl.navigationBar.isTranslucent = false
       let doneBtn: UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Done", comment: ""),
-        style: UIBarButtonItemStyle.done,
+        style: UIBarButtonItem.Style.done,
         target: self,
         action: #selector(self.dismissingController)
       )
       gridController.navigationItem.rightBarButtonItem = doneBtn
 
       navCtrl.preferredContentSize = gridController.view.systemLayoutSizeFitting(
-        UILayoutFittingCompressedSize
+        UIView.layoutFittingCompressedSize
       )
       self.present(navCtrl, animated: true, completion: nil)
     } else {
@@ -433,7 +433,7 @@ class CanvasViewController: UIViewController {
     tipView.lblSlider.text = "Tip Size: \(Int(self.tipSize))"
     tipView.slider.setValue(Float(self.tipSize), animated: true)
     tipView.slider.tag = 1
-    tipView.slider.addTarget(self, action: #selector(self.sliderValueChanged(_:_:)), for: UIControlEvents.valueChanged)
+    tipView.slider.addTarget(self, action: #selector(self.sliderValueChanged(_:_:)), for: UIControl.Event.valueChanged)
 
     self.tipSizeSlider = tipView
 
@@ -451,7 +451,7 @@ class CanvasViewController: UIViewController {
     tipView.slider.tag = 3
     tipView.slider.minimumValue = 20
     tipView.slider.maximumValue = 100
-    tipView.slider.addTarget(self, action: #selector(self.sliderValueChanged(_:_:)), for: UIControlEvents.valueChanged)
+    tipView.slider.addTarget(self, action: #selector(self.sliderValueChanged(_:_:)), for: UIControl.Event.valueChanged)
 
     self.eraserSlider = tipView
 
@@ -467,7 +467,7 @@ class CanvasViewController: UIViewController {
     tipOpacity.slider.maximumValue = 1.0
     tipOpacity.slider.setValue(Float(self.tipOpacity), animated: true)
     tipOpacity.slider.tag = 2
-    tipOpacity.slider.addTarget(self, action: #selector(self.sliderValueChanged(_:_:)), for: UIControlEvents.valueChanged)
+    tipOpacity.slider.addTarget(self, action: #selector(self.sliderValueChanged(_:_:)), for: UIControl.Event.valueChanged)
 
     self.opacitySlider = tipOpacity
 
@@ -476,7 +476,7 @@ class CanvasViewController: UIViewController {
 
   func showActionSheet(forView view: UIView, sourceView: UIView, withTitle title: String, customViewHeight: CGFloat) {
 
-    let alertController = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+    let alertController = UIAlertController(title: title, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
 
     view.cornerRadius = 5
     view.masksToBounds = true
@@ -552,10 +552,10 @@ class CanvasViewController: UIViewController {
   }
 
   func cameraPickerTapped() {
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
       let imagePicker = UIImagePickerController()
       imagePicker.delegate = self
-      imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+      imagePicker.sourceType = UIImagePickerController.SourceType.camera
       imagePicker.allowsEditing = false
       present(imagePicker, animated: true, completion: nil)
     }
@@ -576,8 +576,8 @@ class CanvasViewController: UIViewController {
       self.view.addSubview(self.emptyView!)
     }
 
-    self.view.bringSubview(toFront: self.toolbarView)
-    self.view.bringSubview(toFront: self.toolsPalatteView)
+    self.view.bringSubviewToFront(self.toolbarView)
+    self.view.bringSubviewToFront(self.toolsPalatteView)
     self.emptyView?.tag = 250
   }
 
@@ -682,14 +682,14 @@ class CanvasViewController: UIViewController {
       navCtrl.navigationBar.isTranslucent = false
       let doneBtn: UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Done", comment: ""),
-        style: UIBarButtonItemStyle.done,
+        style: UIBarButtonItem.Style.done,
         target: self,
         action: #selector(self.dismissingController)
       )
       gridController.navigationItem.rightBarButtonItem = doneBtn
 
       navCtrl.preferredContentSize = gridController.view.systemLayoutSizeFitting(
-        UILayoutFittingCompressedSize
+        UIView.layoutFittingCompressedSize
       )
       self.present(navCtrl, animated: true, completion: nil)
     } else {
@@ -709,7 +709,7 @@ class CanvasViewController: UIViewController {
     _ = Utility.setUserLocalObject(object: self.gridLineThickness, key: Constants.UserDefault.gridLineThickness)
     _ = Utility.setUserLocalObject(object: (self.linesDrawn ?? .horizontal).rawValue, key: Constants.UserDefault.gridLines)
     if let backgroundImage = self.backgroundImage.image {
-      _ = Utility.setUserLocalObject(object: UIImagePNGRepresentation(backgroundImage), key: Constants.UserDefault.lastTemplateSelected)
+      _ = Utility.setUserLocalObject(object: backgroundImage.pngData(), key: Constants.UserDefault.lastTemplateSelected)
     }
   }
 
@@ -1004,8 +1004,11 @@ extension CanvasViewController: GridManipulation {
 
 //MARK: - Camera image picker
 extension CanvasViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+    if let pickedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
 
       if self.templatePickerCalled {
         self.backgroundImage.image = pickedImage.fixOrientation()
@@ -1030,4 +1033,14 @@ extension CanvasViewController: UIImagePickerControllerDelegate, UINavigationCon
     }
     return img
   }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

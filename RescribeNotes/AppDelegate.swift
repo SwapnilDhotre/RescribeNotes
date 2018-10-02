@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
 
     self.initApplicationTheme()
@@ -53,8 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     navigationBarAppearace.isTranslucent = false
     navigationBarAppearace.barTintColor = UIColor(hexString: "04abdf")
 
-    UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: UIFont().font(withStyle: .fontBold, size: 18)]
-    UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont().font(withStyle: .fontBold, size: 18)]
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     UINavigationBar.appearance().isOpaque = true
     UINavigationBar.appearance().isTranslucent = false
   }
