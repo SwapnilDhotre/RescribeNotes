@@ -4,10 +4,11 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>DoctorAppIcon.ttf</string>
 		<string>Roboto-Bold.ttf</string>
 		<string>Roboto-Light.ttf</string>
-    <string>Roboto-Medium.ttf</string>
-    <string>Roboto-Regular.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
@@ -27,9 +28,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-  <key>NSCameraUsageDescription</key>
-  <string>Needs access to camera, in order to complete medical data, reports and records.</string><key>NSPhotoLibraryUsageDescription</key>
-  <string>Needs access to gallery, in order to complete medical data, reports and records.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Needs access to camera, in order to complete medical data, reports and records.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Needs access to gallery, in order to complete medical data, reports and records.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

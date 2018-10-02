@@ -14,12 +14,18 @@ PODS:
     - UIViewKVO (~> 2.0)
   - FadeView (2.0.0)
   - PureLayout (3.0.2)
+  - SVProgressHUD (2.2.5)
   - SwiftARGB (2.0.0)
+  - SwiftMessages (4.1.4):
+    - SwiftMessages/App (= 4.1.4)
+  - SwiftMessages/App (4.1.4)
   - TinyLog (2.0.7)
   - UIViewKVO (2.0.0)
 
 DEPENDENCIES:
   - AssetsPickerViewController
+  - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
+  - SwiftMessages
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -29,8 +35,18 @@ SPEC REPOS:
     - FadeView
     - PureLayout
     - SwiftARGB
+    - SwiftMessages
     - TinyLog
     - UIViewKVO
+
+EXTERNAL SOURCES:
+  SVProgressHUD:
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
+
+CHECKOUT OPTIONS:
+  SVProgressHUD:
+    :commit: d860511141f71fa0fb40c3241a0701be06ad7838
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
 
 SPEC CHECKSUMS:
   AssetsPickerViewController: 997cf978cf13574a4846dae7e9b864a1ec93c77a
@@ -38,10 +54,12 @@ SPEC CHECKSUMS:
   Dimmer: 9908a0003f4882eca1b2e318e11f82d32280794e
   FadeView: 80197da2fbee5382b178127e8c5f988a35eef018
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftARGB: 8727cfcdcfe8709e707a2391f1d5802a7c40dcad
+  SwiftMessages: 2c33fdee8b8f38dfc7e1036684456b505891da8c
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   UIViewKVO: 091f9e020d69e73c4bf5e5ef61cde7bff1c24bbf
 
-PODFILE CHECKSUM: a3d7990ec0f4fa55fa2cf220d7d2939f10d53e96
+PODFILE CHECKSUM: 190fef0324ab41982ac1fa7045aa73140cce334c
 
 COCOAPODS: 1.5.0

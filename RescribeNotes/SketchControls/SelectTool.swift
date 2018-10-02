@@ -29,6 +29,11 @@ class SelectTool: SketchTool {
     self.touchPoint = endPoint
   }
 
+  func maskImageWithColor(color: UIColor) {
+
+    self.imageTool?.image = self.imageTool?.image?.maskWithColor(color: color)
+  }
+
   func draw() {
     print("Tool draw called")
 

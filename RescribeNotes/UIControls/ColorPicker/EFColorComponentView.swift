@@ -120,6 +120,7 @@ class EFColorComponentView: UIControl, UITextFieldDelegate {
         self.accessibilityLabel = "color_component_view"
 
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
         self.addSubview(label)
 

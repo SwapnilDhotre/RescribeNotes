@@ -10,11 +10,13 @@ import UIKit
 
 protocol TemplatePalatteDelegate {
 
+  func getDefaultTemplate(image: UIImage)
   func selectedTemplate(template: TemplateImage)
 }
 
 enum TemplateImage: String {
-  case grid = "grid1"
+  case blank = "blank"
+  case grid = "grid"
   case crossGrid = "crossGrid"
   case graphPaper = "graphPaper"
   case peyoteGrid = "peyote"
@@ -44,12 +46,14 @@ class TemplatePalatteView: NibView {
   @IBOutlet var defaultImageContainer: UIView!
   @IBOutlet var lblDefaultTitle: UILabel!
   
-
+  @IBOutlet var btnGalleryPicker: UIButton!
+  
   override func awakeFromNib() {
 
     super.awakeFromNib()
 
     self.templates = [
+      TemplateImage.blank,
       TemplateImage.grid,
       TemplateImage.crossGrid,
       TemplateImage.graphPaper,
@@ -66,23 +70,17 @@ class TemplatePalatteView: NibView {
 
   func setUIAppearance() {
 
+    self.layoutIfNeeded()
     self.templatesCollectionView.backgroundColor = UIColor.clear
     self.templatesCollectionView.backgroundView = UIView(frame: CGRect.zero)
 
     self.labelTitle.roundCorners(corners: [.topRight], radius: 10)
 
     // Set Expand button images
-    self.btnExpandTemplate.setImage(#imageLiteral(resourceName: "arrowLeft.png").maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1)), for: .selected)
-    self.btnExpandTemplate.setImage(#imageLiteral(resourceName: "arrowRight.png").maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1)), for: .normal)
+    self.btnExpandTemplate.setImage(#imageLiteral(resourceName: "notesArrowLeft.png").maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1)), for: .selected)
+    self.btnExpandTemplate.setImage(#imageLiteral(resourceName: "notesArrowRight.png").maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1)), for: .normal)
 
-    self.layoutSubviews()
-    self.selectedTemplateImage.image = #imageLiteral(resourceName: "grid1Thumb.png")
-    self.selectedTemplateImage.cornerRadius = 10
-    self.selectedTemplateImage.masksToBounds = true
-    self.defaultImageContainer.layer.cornerRadius = 5.0
-    self.defaultImageContainer.layer.borderWidth = 1.5
-    self.defaultImageContainer.layer.borderColor = UIColor.white.cgColor
-    self.defaultImageContainer.layer.masksToBounds = false
+    self.selectedTemplateImage.image = TemplateImage.blank.thumbIcon
 
     let cornerRadius: CGFloat = 7
     let shadowOffsetWidth: Int = 0
@@ -99,7 +97,7 @@ class TemplatePalatteView: NibView {
 
   // MARK: - Action Methods
   @IBAction func defaultTemplatetapped(_ sender: UIButton) {
-    self.templateDelegate?.selectedTemplate(template: .grid)
+    self.templateDelegate?.getDefaultTemplate(image: self.selectedTemplateImage.image!)
   }
 }
 
@@ -153,7 +151,7 @@ extension TemplatePalatteView: UICollectionViewDelegate {
 extension TemplatePalatteView: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
 
-    let cellWidth: Double = Double((collectionView.bounds.width - 50) / (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad ? 3 : 2))
+    let cellWidth: Double = Double((collectionView.bounds.width - 70) / (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad ? 3 : 2))
 
     return CGSize(width: cellWidth, height: (cellWidth / 0.70))// makes 3:4 ratio height
   }

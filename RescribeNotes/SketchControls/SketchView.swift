@@ -49,8 +49,6 @@ public class SketchView: UIView {
     }
   }
 
-  private var previousLineWidth: CGFloat = 0
-
   public var drawingPenType: PenType = .normal
   public var sketchViewDelegate: SketchViewDelegate?
   public var currentSelectedImage: UIImage?
@@ -84,7 +82,6 @@ public class SketchView: UIView {
 
   private func prepareForInitial() {
     backgroundColor = UIColor.clear
-    self.previousLineWidth = self.lineWidth
 
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: Notification.Name.UIKeyboardWillHide, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: Notification.Name.UIKeyboardWillShow, object: nil)
@@ -141,18 +138,22 @@ public class SketchView: UIView {
     }
   }
 
-  private func draw(backgroundImage: UIImage) {
+  private func draw(backgroundImage: UIImage, foregroundImage: UIImage) {
 
-    self.backgroundImage = backgroundImage
-    self.updateCacheImage(true)
+    UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+
+    self.image = nil
+
+    backgroundImage.draw(at: CGPoint.zero)
+    foregroundImage.draw(at: CGPoint.zero)
+
+    image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
     self.setNeedsDisplay()
   }
 
   func getEditedImage(backgroundImage: UIImage?, completion: (UIImage) -> ()) {
-
-    if backgroundImage != nil {
-      self.draw(backgroundImage: backgroundImage!)
-    }
 
     self.setNeedsDisplay()
     UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
@@ -170,11 +171,12 @@ public class SketchView: UIView {
 
     self.setNeedsDisplay()
 
-    completion(self.image!)
+    if backgroundImage != nil {
+      let copyCurrentCached: UIImage = image?.copy() as! UIImage
+      self.draw(backgroundImage: backgroundImage!, foregroundImage: copyCurrentCached)
+    }
 
-    self.backgroundImage = nil
-    self.updateCacheImage(true)
-    self.setNeedsDisplay()
+    completion(self.image!)
   }
 
   func getSelectTool() -> SelectTool? {
@@ -309,15 +311,16 @@ public class SketchView: UIView {
       let imageTool = ImageViewTool()
       return imageTool
     case .select:
-
-      return self.getSelectTool()
+      if let selectTool = self.getSelectTool() {
+        return selectTool
+      } else {
+        self.drawTool = .pen
+        return PenTool()
+      }
     }
   }
 
   private func createEraserView() {
-
-    self.previousLineWidth = self.lineWidth
-    self.lineWidth = 40
 
     let view = UIView(frame: CGRect(x: 0, y: 0, width: self.lineWidth - 2, height: self.lineWidth - 2))
     view.center = currentPoint!
@@ -336,7 +339,7 @@ public class SketchView: UIView {
     guard let touch = touches.first else { return }
 
     sketchViewDelegate?.drawView?(self, willBeginDrawUsingTool: nil)
-    
+
     previousPoint1 = touch.previousLocation(in: self)
     currentPoint = touch.location(in: self)
     if self.keyboardVisible {
@@ -418,7 +421,6 @@ public class SketchView: UIView {
 
     if self.drawTool == .eraser {
       self.drawTool = .pen
-      self.lineWidth = self.previousLineWidth
       self.eraserView?.removeFromSuperview() // Used only when eraser is activated
     }
     finishDrawing()

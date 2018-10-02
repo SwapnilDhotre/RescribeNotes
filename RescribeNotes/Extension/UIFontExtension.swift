@@ -22,6 +22,6 @@ extension UIFont {
   }
 
   func fontIcon(withSize size: Int) -> UIFont {
-    return UIFont(name: "MyRescribe", size: CGFloat(size))!
+    return UIFont(name: "DoctorAppIcon", size: CGFloat(size))!
   }
 }

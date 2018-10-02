@@ -44,7 +44,7 @@ class ViewEmbedder {
 //    let vc = parent.storyboard!.instantiateViewController(withIdentifier: id)
 
     let colorSelectionController = EFColorSelectionViewController()
-    colorSelectionController.delegate = (container.superview as! GridView)
+    colorSelectionController.delegate = (parent as! GridViewController)
     colorSelectionController.color = defaultColor
     colorSelectionController.preferredContentSize = colorSelectionController.view.systemLayoutSizeFitting(
       UILayoutFittingCompressedSize

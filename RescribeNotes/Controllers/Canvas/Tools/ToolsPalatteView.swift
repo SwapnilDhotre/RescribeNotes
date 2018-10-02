@@ -48,13 +48,12 @@ class ToolsPalatteView: NibView {
     super.awakeFromNib()
 
     self.tools = [
-
 //      Tool(title: "Brush", tool: .paintBrush),
       Tool(title: "Pencil", tool: .pencilTool),
       Tool(title: "Text", tool: .textTool),
       Tool(title: "Shape", tool: .shapeTool),
-      Tool(title: "Clipart", tool: .clipArt),
-      Tool(title: "Image", tool: .imageTool)
+      Tool(title: "Image", tool: .imageTool),
+      Tool(title: "Clipart", tool: .clipArt)
     ]
 
     self.collectionView.dataSource = self
@@ -70,8 +69,8 @@ class ToolsPalatteView: NibView {
     self.collectionView.backgroundView = UIView(frame: CGRect.zero)
 
     // Set Expand button images
-    self.btnExpandTools.setImage(#imageLiteral(resourceName: "arrowLeft.png").maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1)), for: .normal)
-    self.btnExpandTools.setImage(#imageLiteral(resourceName: "arrowRight.png").maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1)), for: .selected)
+    self.btnExpandTools.setImage(#imageLiteral(resourceName: "notesArrowLeft.png").maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1)), for: .normal)
+    self.btnExpandTools.setImage(#imageLiteral(resourceName: "notesArrowRight.png").maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1)), for: .selected)
   }
 }
 

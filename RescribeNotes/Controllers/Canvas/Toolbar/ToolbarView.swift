@@ -59,7 +59,13 @@ class ToolbarView: NibView {
 
   func setToolBar() {
 
-    if self.selectedTool == .pen {
+    if self.selectedTool == .pen ||
+      self.selectedTool == .arrow ||
+      self.selectedTool == .ellipseFill ||
+      self.selectedTool == .ellipseStroke ||
+      self.selectedTool == .line ||
+      self.selectedTool == .rectangleFill ||
+      self.selectedTool == .rectangleStroke {
       self.toolBar = [
         ToolBarButton(title: "Undo", object: .undo),
         ToolBarButton(title: "Redo", object: .redo),
@@ -73,8 +79,8 @@ class ToolbarView: NibView {
         ToolBarButton(title: "Undo", object: .undo),
         ToolBarButton(title: "Redo", object: .redo),
         ToolBarButton(title: "Eraser", object: .eraser),
-        ToolBarButton(title: "Color", object: .color),
-        ToolBarButton(title: "Font", object: .font)
+        ToolBarButton(title: "Color", object: .color)
+//        ToolBarButton(title: "Font", object: .font)
       ]
     } else if self.selectedTool == .select {
       self.toolBar = [
@@ -89,6 +95,15 @@ class ToolbarView: NibView {
       ]
     }
 
+    self.collectionView.reloadData()
+  }
+
+  func showColorOption() {
+    self.toolBar = [
+      ToolBarButton(title: "Undo", object: .undo),
+      ToolBarButton(title: "Redo", object: .redo),
+      ToolBarButton(title: "Color", object: .color)
+    ]
     self.collectionView.reloadData()
   }
 
@@ -108,9 +123,9 @@ extension ToolbarView: UICollectionViewDataSource {
     if self.toolBar[indexPath.row].object == .eraser {
 
       if self.eraserSelected {
-        cell.icon.image = self.toolBar[indexPath.row].object.icon
+        cell.icon.image = self.toolBar[indexPath.row].object.icon.maskWithColor(color: #colorLiteral(red: 0.01568627451, green: 0.6823529412, blue: 0.8941176471, alpha: 1))
       } else {
-        cell.icon.image = self.toolBar[indexPath.row].object.icon.maskWithColor(color: .black)
+        cell.icon.image = self.toolBar[indexPath.row].object.icon
       }
     } else {
       cell.icon.image = self.toolBar[indexPath.row].object.icon

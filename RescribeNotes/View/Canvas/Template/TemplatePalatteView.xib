@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="DoctorAppIcon.ttf">
+            <string>DoctorAppIcon</string>
+        </array>
+    </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TemplatePalatteView" customModule="RescribeNotes" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TemplatePalatteView" customModule="RescribeDoctor" customModuleProvider="target">
             <connections>
                 <outlet property="btnExpandTemplate" destination="hU8-LJ-132" id="vl1-Rs-cm0"/>
+                <outlet property="btnGalleryPicker" destination="dEI-CV-Wgq" id="WfC-Fd-6pt"/>
                 <outlet property="defaultImageContainer" destination="g7z-WG-Qsz" id="adQ-g3-sMp"/>
                 <outlet property="labelTitle" destination="rbo-Ob-Mpv" id="G5d-O6-z6i"/>
                 <outlet property="lblDefaultTitle" destination="k84-5X-lmW" id="Sqk-GG-dJ7"/>
@@ -85,11 +90,11 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7z-WG-Qsz">
                     <rect key="frame" x="112" y="52" width="111" height="150"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" image="grid1Thumb.png" translatesAutoresizingMaskIntoConstraints="NO" id="1RD-9Y-hiJ">
-                            <rect key="frame" x="5" y="5" width="101" height="138"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="1RD-9Y-hiJ">
+                            <rect key="frame" x="5" y="5" width="101" height="117.5"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Default" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k84-5X-lmW">
-                            <rect key="frame" x="5" y="147" width="101" height="0.0"/>
+                            <rect key="frame" x="5" y="126.5" width="101" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -131,6 +136,35 @@
                         <action selector="defaultTemplatetapped:" destination="-1" eventType="touchUpInside" id="6kU-Ov-nV8"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEI-CV-Wgq">
+                    <rect key="frame" x="250" y="580" width="60" height="60"/>
+                    <color key="backgroundColor" red="0.34901960780000002" green="0.69411764710000001" blue="0.80447814537777784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="Pwc-5o-kmJ"/>
+                        <constraint firstAttribute="height" constant="60" id="ulO-I1-5JS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="DoctorAppIcon" family="DoctorAppIcon" pointSize="25"/>
+                    <state key="normal" title="_">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                            <color key="value" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                            <size key="value" width="1" height="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                            <real key="value" value="0.59999999999999998"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -149,18 +183,20 @@
                 <constraint firstItem="hvh-v1-mS5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="V2r-34-YSx"/>
                 <constraint firstItem="O4q-n5-Nlh" firstAttribute="width" secondItem="g7z-WG-Qsz" secondAttribute="width" id="XF4-ik-AX3"/>
                 <constraint firstItem="hvh-v1-mS5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="d6o-GB-gbU"/>
+                <constraint firstItem="dEI-CV-Wgq" firstAttribute="bottom" secondItem="hvh-v1-mS5" secondAttribute="bottom" constant="-25" id="hTc-oI-LZK"/>
                 <constraint firstItem="O4q-n5-Nlh" firstAttribute="height" secondItem="g7z-WG-Qsz" secondAttribute="height" id="iTq-qf-EPP"/>
                 <constraint firstItem="rbo-Ob-Mpv" firstAttribute="top" secondItem="hvh-v1-mS5" secondAttribute="top" id="mRk-9j-EFM"/>
                 <constraint firstItem="zML-RQ-NQg" firstAttribute="leading" secondItem="rbo-Ob-Mpv" secondAttribute="trailing" id="o7W-4F-7rj"/>
                 <constraint firstItem="QOh-JF-Vge" firstAttribute="top" secondItem="g7z-WG-Qsz" secondAttribute="bottom" constant="15" id="oGm-CY-YLC"/>
+                <constraint firstItem="dEI-CV-Wgq" firstAttribute="trailing" secondItem="hvh-v1-mS5" secondAttribute="trailing" constant="-25" id="p4z-Ya-mex"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="QOh-JF-Vge" secondAttribute="bottom" constant="15" id="rYx-HY-BGC"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <point key="canvasLocation" x="32.799999999999997" y="52.623688155922046"/>
         </view>
     </objects>
     <resources>
-        <image name="arrowRight" width="16" height="16"/>
-        <image name="grid1Thumb.png" width="150" height="203"/>
+        <image name="arrowRight" width="18" height="18"/>
+        <image name="blank" width="40" height="40"/>
     </resources>
 </document>

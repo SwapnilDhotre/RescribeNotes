@@ -6,7 +6,8 @@ target 'RescribeNotes' do
   use_frameworks!
 
   pod 'AssetsPickerViewController'
-
+  pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
+  pod 'SwiftMessages'
   # Pods for RescribeNotes
 
 end

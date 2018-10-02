@@ -62,7 +62,7 @@ class EFColorWheelView: UIControl {
         indicatorLayer.cornerRadius = dimension / 2
         indicatorLayer.borderColor = edgeColor.cgColor
         indicatorLayer.borderWidth = 2
-        indicatorLayer.backgroundColor = UIColor.white.cgColor
+        indicatorLayer.backgroundColor = UIColor.black.cgColor
         indicatorLayer.bounds = CGRect(x: 0, y: 0, width: dimension, height: dimension)
         indicatorLayer.position = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2)
         indicatorLayer.shadowColor = UIColor.black.cgColor
@@ -83,6 +83,7 @@ class EFColorWheelView: UIControl {
 
         self.accessibilityLabel = "color_wheel_view"
 
+        self.layer.backgroundColor = UIColor.black.cgColor
         self.layer.delegate = self
         self.layer.addSublayer(self.indicatorLayer)
 
@@ -148,6 +149,7 @@ class EFColorWheelView: UIControl {
             withSize: CGSize(width: dimension, height: dimension)
         )
         if let image = self.ef_imageWithRGBAData(data: bitmapData, width: Int(dimension), height: Int(dimension)) {
+            self.layer.backgroundColor = UIColor.black.cgColor
             self.layer.contents = image
         }
     }
@@ -192,6 +194,12 @@ class EFColorWheelView: UIControl {
                     let hsb: HSB = HSB(hue, saturation, brightness, a)
                     rgb = EFHSB2RGB(hsb: hsb)
                 }
+
+              if rgb.red == 1 && rgb.green == 1 && rgb.blue == 1 && rgb.alpha == 1 {
+                rgb.red = 51/255.0
+                rgb.green = 54/255.0
+                rgb.blue = 59/255.0
+              }
 
                 let i: Int = 4 * (x + y * Int(size.width))
                 bitmap?[i] = UInt8(rgb.red * 0xff)
